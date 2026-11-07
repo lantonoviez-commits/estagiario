@@ -395,7 +395,7 @@
     const MASTER_SECRET = "redline2026";
     const MASTER_ID = "2026";
 
-    // QUESTÕES COM TEXTO DA RESPOSTA CORRETA FIXO (GABARITO INFALÍVEL)
+    // 10 QUESTÕES OFICIAIS COM TEXTO DE RESPOSTA CORRETA INALTERÁVEL
     const baseQuestions = [
       {
         id: 1,
@@ -529,7 +529,7 @@
     let timerInterval = null;
     const TIME_PER_QUESTION = 90;
 
-    // EMBARALHAMENTO ALEATÓRIO DAS ALTERNATIVAS
+    // EMBARALHAMENTO DAS ALTERNATIVAS
     function shuffleArray(arr) {
       const array = [...arr];
       for (let i = array.length - 1; i > 0; i--) {
@@ -556,48 +556,24 @@
       });
     }
 
+    // ALGORITMO ROBUSTO DE ASSINATURA DA CHAVE
     function createToken(id) {
+      const cleanId = String(id).trim().toLowerCase();
       let hash = 0;
-      const str = `${MASTER_SECRET}_REDLINE_${id}_SECURE`;
-      for (let i = 0; i < str.length; i++) {
-        hash = ((hash << 5) - hash) + str.charCodeAt(i);
-        hash |= 0;
-      }
-      return Math.abs(hash).toString(16).toUpperCase();
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const urlParams = new URLSearchParams(window.location.search);
-
-      if (urlParams.get("admin") === "1") {
-        openLeaderPanel();
-      }
-
-      const paramId = urlParams.get("id");
-      const paramToken = urlParams.get("chave") || urlParams.get("token");
-      const paramNome = urlParams.get("nome");
-
-      if (paramId === MASTER_ID && paramToken === MASTER_SECRET) {
-        setupAuthorizedScreen("Líder / Teste", MASTER_ID, "MASTER");
-        return;
-      }
-
-      if (paramId && paramToken) {
-        const expectedToken = createToken(paramId);
-        if (paramToken === expectedToken) {
-          if (localStorage.getItem(`redline_used_${paramToken}`)) {
+      const str = `${MASTER_SECRET}_REDLINE_${cleanId}_SECURE`; for (let i = 0; i < str.length; i++) { hash = ((hash << 5) - hash) + str.charCodeAt(i); hash \vert{}= 0; } return Math.abs(hash).toString(16).toUpperCase(); }  // INICIALIZAÇÃO E LEITURA DA URL window.addEventListener("DOMContentLoaded", () => { const urlParams = new URLSearchParams(window.location.search);  // Abre o painel se a URL tiver ?admin=1 if (urlParams.get("admin") === "1") { openLeaderPanel(); }  const rawId = urlParams.get("id"); const rawToken = urlParams.get("chave") \vert{}\vert{} urlParams.get("token"); const paramNome = urlParams.get("nome");  // Verificação de acesso Master direto if (rawId === MASTER_ID && rawToken === MASTER_SECRET) { setupAuthorizedScreen("Líder / Teste", MASTER_ID, "MASTER"); return; }  // Validação da chave única do candidato if (rawId && rawToken) { const cleanId = String(rawId).trim(); const expectedToken = createToken(cleanId); const cleanToken = String(rawToken).trim().toUpperCase();  if (cleanToken === expectedToken) { // Bloqueio se a chave já foi consumida if (localStorage.getItem(`redline_used_${cleanToken}`)) {
             showUnauthorized("CHAVE JÁ UTILIZADA", "Esta chave de acesso já realizou a avaliação e foi consumida. Não é permitido refazer a prova.");
             return;
           }
-          setupAuthorizedScreen(paramNome || "", paramId, paramToken);
+          setupAuthorizedScreen(paramNome || "", cleanId, cleanToken);
           return;
         } else {
-          showUnauthorized("CHAVE INVÁLIDA", "O código ou passaporte contido neste link não é autêntico. Solicite um link válido com a liderança.");
+          showUnauthorized("CHAVE INVÁLIDA", `O código de acesso para o ID ${cleanId} não é autêntico. Solicite um novo link com a liderança.`);
           return;
         }
       }
 
-      showUnauthorized("ACESSO RESTRITO", "Esta avaliação exige um link com chave única emitido pela liderança da RedLine.");
+      // Se entrou sem chave na URL
+      showUnauthorized("ACESSO RESTRITO", "Esta avaliação exige um link com chave única individual emitida pela liderança da RedLine.");
     });
 
     function setupAuthorizedScreen(name, id, token) {
@@ -624,6 +600,7 @@
       screen.style.display = "block";
     }
 
+    // PAINEL DO LÍDER
     function openLeaderPanel() {
       const modal = document.getElementById("modalLeaderPanel");
       modal.style.setProperty("display", "flex", "important");
@@ -663,22 +640,29 @@
       }
 
       const token = createToken(id);
-      const baseUrl = window.location.origin + window.location.pathname;
-      let finalUrl = `${baseUrl}?id=${encodeURIComponent(id)}&chave=${token}`;
+
+      // Garante uma URL limpa sem parâmetros residuais antigos
+      const urlObj = new URL(window.location.href);
+      urlObj.search = ""; // limpa ?admin=1 ou parâmetros antigos
+      urlObj.searchParams.set("id", id);
+      urlObj.searchParams.set("chave", token);
       if (name) {
-        finalUrl += `&nome=${encodeURIComponent(name)}`;
+        urlObj.searchParams.set("nome", name);
       }
+
+      const finalUrl = urlObj.toString();
 
       navigator.clipboard.writeText(finalUrl).then(() => {
         document.getElementById("genResultUrl").value = finalUrl;
         document.getElementById("genResultBox").style.display = "block";
-        alert("Link gerado e COPIADO com sucesso! Pode colar no Discord do candidato.");
+        alert(`Link gerado e COPIADO com sucesso para o ID ${id}! Pode colar no Discord do candidato.`);
       }).catch(() => {
         document.getElementById("genResultUrl").value = finalUrl;
         document.getElementById("genResultBox").style.display = "block";
       });
     }
 
+    // CONTROLE DA PROVA
     function iniciarProva() {
       const nameInput = document.getElementById("inputCandidateName");
       const checkAgree = document.getElementById("checkAgree");
@@ -698,30 +682,9 @@
 
       candidateName = name;
 
-      // Consome a chave se não for o acesso mestre
+      // Consome a chave imediatamente (exceto no teste Master)
       if (currentToken && currentToken !== "MASTER") {
-        localStorage.setItem(`redline_used_${currentToken}`, "true");
-      }
-
-      // Cria a ordem aleatória das alternativas para esta sessão de prova
-      buildRandomizedQuestions();
-
-      document.getElementById("displayCardCandidateName").textContent = candidateName;
-      document.getElementById("displayCardCandidateId").textContent = candidateId;
-
-      document.getElementById("screen-instructions").style.display = "none";
-      document.getElementById("screen-exam").style.display = "grid";
-
-      currentQuestionIdx = 0;
-      userAnswers = {};
-      loadQuestion(0);
-    }
-
-    function loadQuestion(index) {
-      currentQuestionIdx = index;
-      const q = questions[index];
-
-      document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / 10`;
+        localStorage.setItem(`redline_used_${currentToken}`, "true"); }  // Embaralha as alternativas para o candidato buildRandomizedQuestions();  document.getElementById("displayCardCandidateName").textContent = candidateName; document.getElementById("displayCardCandidateId").textContent = candidateId;  document.getElementById("screen-instructions").style.display = "none"; document.getElementById("screen-exam").style.display = "grid";  currentQuestionIdx = 0; userAnswers = {}; loadQuestion(0); }  function loadQuestion(index) { currentQuestionIdx = index; const q = questions[index];  document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / 10`;
       document.getElementById("displayQuestionTitle").textContent = q.title;
 
       const nextBtn = document.getElementById("btnNextQuestion");
@@ -739,162 +702,4 @@
             onclick="selectOption('${opt.key}', '${encodeURIComponent(opt.text)}')" 
             class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
           >
-            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
-              ${opt.key}
-            </div>
-            <span class="text-xs font-semibold ${isSelected ? 'text-white' : 'text-zinc-300'}">${opt.text}</span>
-          </div>
-        `;
-      }).join('');
-
-      renderAnswerCard();
-      startTimer();
-    }
-
-    function selectOption(key, encodedText) {
-      const q = questions[currentQuestionIdx];
-      const text = decodeURIComponent(encodedText);
-      userAnswers[q.id] = { key: key, text: text };
-      loadQuestion(currentQuestionIdx);
-    }
-
-    function submitAnswer() {
-      if (currentQuestionIdx === questions.length - 1) {
-        document.getElementById("modalConfirmSubmit").style.display = "flex";
-      } else {
-        advanceQuestion();
-      }
-    }
-
-    function advanceQuestion() {
-      clearInterval(timerInterval);
-      if (currentQuestionIdx < questions.length - 1) {
-        loadQuestion(currentQuestionIdx + 1);
-      } else {
-        finishExam();
-      }
-    }
-
-    function closeConfirmModal() {
-      document.getElementById("modalConfirmSubmit").style.display = "none";
-    }
-
-    function finishExam() {
-      clearInterval(timerInterval);
-      closeConfirmModal();
-
-      document.getElementById("screen-exam").style.display = "none";
-      document.getElementById("screen-instructions").style.display = "none";
-      document.getElementById("screen-result").style.display = "block";
-
-      // Cálculo de nota baseado no texto exato da resposta (imune à posição embaralhada)
-      let score = 0;
-      questions.forEach(q => {
-        if (userAnswers[q.id] && userAnswers[q.id].text === q.correctText) {
-          score++;
-        }
-      });
-
-      const percent = (score / 10) * 100;
-      const isApproved = score >= 7;
-
-      document.getElementById("resultCandidateName").textContent = candidateName;
-      document.getElementById("resultPercentText").textContent = `${percent}%`;
-      document.getElementById("resultFinalScore").textContent = `${score}/10`;
-      document.getElementById("resultCorrectCount").textContent = `${score}/10`;
-
-      const offset = 364.4 - (364.4 * percent) / 100;
-      const circle = document.getElementById("resultProgressCircle");
-      if (circle) circle.style.strokeDashoffset = offset;
-
-      const heading = document.getElementById("resultStatusHeading");
-      const badge = document.getElementById("resultStatusBadge");
-      const feedback = document.getElementById("resultFeedbackText");
-
-      if (isApproved) {
-        if (circle) circle.setAttribute("stroke", "#84cc16");
-        heading.textContent = "APROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
-        badge.textContent = "ENCAMINHADO: APROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
-        feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
-      } else {
-        if (circle) circle.setAttribute("stroke", "#ef233c");
-        heading.textContent = "REPROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
-        badge.textContent = "ENCAMINHADO: REPROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
-        feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
-      }
-
-      sendDiscordWebhook(score, percent, isApproved);
-    }
-
-    function sendDiscordWebhook(score, percent, isApproved) {
-      const statusMsg = document.getElementById("discordStatusMsg");
-
-      if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === "SUA_URL_DO_WEBHOOK_AQUI") {
-        statusMsg.textContent = "ℹ️ Webhook não configurado no código. Resultado salvo localmente.";
-        statusMsg.className = "mt-4 p-2.5 rounded-lg bg-zinc-900 border border-zinc-700 text-[11px] text-zinc-400";
-        return;
-      }
-
-      const payload = {
-        username: "Central de Provas • RedLine",
-        avatar_url: "https://i.imgur.com/8Q5N8mB.png",
-        embeds: [
-          {
-            title: isApproved ? "✅ CANDIDATO APROVADO • ESTAGIÁRIO" : "❌ CANDIDATO REPROVADO • ESTAGIÁRIO",
-            color: isApproved ? 0x84cc16 : 0xef233c,
-            description: `Um candidato concluiu a prova oficial de estagiário da **Mecânica RedLine**.`,
-            fields: [
-              {
-                name: "👤 Candidato",
-                value: `**${candidateName}**`,
-                inline: true
-              },
-              {
-                name: "🆔 Passaporte / ID",
-                value: `\`${candidateId}\``,
-                inline: true
-              },
-              {
-                name: "📊 Aproveitamento",
-                value: `**${score}/10** (${percent}%)`,
-                inline: true
-              },
-              {
-                name: "🎯 Nota Mínima",
-                value: "7 / 10 pontos",
-                inline: true
-              },
-              {
-                name: "🔑 Chave de Acesso",
-                value: `\`${currentToken || "ACESSO_MASTER"}\``,
-                inline: true
-              },
-              {
-                name: "📅 Horário de Conclusão",
-                value: new Date().toLocaleString("pt-BR"),
-                inline: true
-              }
-            ],
-            footer: {
-              text: "RedLine Mecânica • Central de Avaliação e Auditoria"
-            },
-            timestamp: new Date().toISOString()
-          }
-        ]
-      };
-
-      fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (res.ok) {
-          statusMsg.textContent = "✓ Relatório oficial enviado e registrado com sucesso no Discord da liderança!";
-          statusMsg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
-        } else {
-          statusMsg.textContent
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300
