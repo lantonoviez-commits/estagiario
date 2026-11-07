@@ -30,11 +30,12 @@
 </head>
 <body class="min-h-screen bg-[#08080c] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- CABEÇALHO COM EMBLEMA OFICIAL REDLINE -->
+  <!-- CABEÇALHO SUPERIOR COM EMBLEMA OFICIAL REDLINE -->
   <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3.5">
-        <div class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center">
+        <!-- Duplo clique no emblema reseta o bloqueio de teste se você for o admin -->
+        <div ondblclick="adminResetLock()" title="Duplo clique (Admin): limpar travas de teste" class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center cursor-pointer select-none">
           <svg class="w-11 h-11 filter drop-shadow-[0_0_8px_rgba(239,35,60,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 8C48.5 8 47.5 9 47 10.5L45.5 15C42.5 15.8 39.8 17 37.2 18.5L33 16C31.8 15.2 30.2 15.5 29.2 16.5L25 20.7C24 21.7 23.7 23.3 24.5 24.5L27 28.7C25.5 31.3 24.3 34 23.5 37L19 38.5C17.5 39 16.5 40 16.5 41.5V47.5C16.5 49 17.5 50 19 50.5L23.5 52C24.3 55 25.5 57.7 27 60.3L24.5 64.5C23.7 65.7 24 67.3 25 68.3L29.2 72.5C30.2 73.5 31.8 73.8 33 73L37.2 70.5C39.8 72 42.5 73.2 45.5 74L47 78.5C47.5 80 48.5 81 50 81H56C57.5 81 58.5 80 59 78.5L60.5 74C63.5 73.2 66.2 72 68.8 70.5L73 73C74.2 73.8 75.8 73.5 76.8 72.5L81 68.3C82 67.3 82.3 65.7 81.5 64.5L79 60.3C80.5 57.7 81.7 55 82.5 52L87 50.5C88.5 50 89.5 49 89.5 47.5V41.5C89.5 40 88.5 39 87 38.5L82.5 37C81.7 34 80.5 31.3 79 28.7L81.5 24.5C82.3 23.3 82 21.7 81 20.7L76.8 16.5C75.8 15.5 74.2 15.2 73 16L68.8 18.5C66.2 17 63.5 15.8 60.5 15L59 10.5C58.5 9 57.5 8 56 8H50Z" fill="#18181e" stroke="#ef233c" stroke-width="2.5"/>
             <circle cx="50" cy="44" r="23" fill="#0d0e14" stroke="#e5e7eb" stroke-width="1.5"/>
@@ -85,12 +86,12 @@
         TENTATIVA JÁ REGISTRADA
       </div>
 
-      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto" id="blockedDescription">
-        Esta prova é de acesso único. Nosso sistema identificou que você já iniciou ou concluiu sua avaliação. Qualquer tentativa de recarregar a página (F5) anula a prova imediatamente.
+      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">
+        Esta prova é de acesso único. Nosso sistema identificou que você já iniciou ou concluiu sua avaliação. Qualquer tentativa de recarregar a página (F5) ou abandono anula a prova imediatamente.
       </p>
 
       <div class="mt-6 p-4 rounded-xl bg-black/40 border border-zinc-800 text-left text-xs space-y-1.5" id="blockedDetails">
-        <!-- Detalhes do candidato bloqueado inseridos aqui via JS -->
+        <!-- Detalhes do bloqueio inseridos via JS -->
       </div>
 
       <div class="mt-6 pt-4 border-t border-zinc-800/80">
@@ -116,12 +117,14 @@
       <!-- Dados do Candidato -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5 bg-zinc-900/40 border border-zinc-800/80 p-4 rounded-xl">
         <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">NOME DO CANDIDATO</label>
-          <input type="text" id="inputCandidateName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">NOME DO CANDIDATO <span class="text-red-500">*</span></label>
+          <input type="text" id="inputCandidateName" oninput="validateStartConditions()" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1 transition-all">
+          <span id="nameError" class="text-[9px] text-red-400 hidden mt-1 block">Obrigatório preencher o nome</span>
         </div>
         <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID</label>
-          <input type="number" id="inputCandidateId" placeholder="Ex: 00223" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID <span class="text-red-500">*</span></label>
+          <input type="number" id="inputCandidateId" oninput="validateStartConditions()" placeholder="Ex: 00223" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1 transition-all">
+          <span id="idError" class="text-[9px] text-red-400 hidden mt-1 block">Obrigatório preencher o ID</span>
         </div>
       </div>
 
@@ -158,18 +161,19 @@
         </div>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
-          <p class="text-red-400 font-semibold">⚠️ ATENÇÃO: NÃO aperte F5 nem atualize a página. Se fizer isso, a prova será bloqueada e zerada automaticamente.</p>
+          <p class="text-red-400 font-semibold">⚠️ Não recarregue a página (F5) após iniciar, pois o acesso será bloqueado de forma definitiva.</p>
         </div>
       </div>
 
       <!-- Aceite e Início -->
       <div class="pt-2 border-t border-zinc-800 space-y-4">
-        <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300 select-none">
-          <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-500 focus:ring-0">
-          <span>Li as instruções e estou ciente de que recarregar a página bloqueará meu acesso.</span>
+        <label class="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-300 select-none">
+          <input type="checkbox" id="checkAgree" onchange="validateStartConditions()" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-600 focus:ring-0 cursor-pointer">
+          <span>Li as instruções e estou pronto para começar. <span class="text-red-500">*</span></span>
         </label>
-        <button onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all">
-          COMEÇAR PROVA
+        
+        <button onclick="startExam()" id="btnStartExam" disabled class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-zinc-800 text-zinc-500 cursor-not-allowed transition-all shadow-none">
+          PREENCHA NOME, ID E CONFIRME AS REGRAS
         </button>
       </div>
     </div>
@@ -229,8 +233,8 @@
       <div class="lg:col-span-4 space-y-4">
         <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">CANDIDATO</span>
-          <h4 class="text-sm font-bold font-heading text-white" id="displayCardCandidateName">! Felipe S</h4>
-          <span class="text-[10px] text-zinc-500 font-heading">PROVA Nº <span id="displayCardCandidateId" class="text-zinc-300">00223</span></span>
+          <h4 class="text-sm font-bold font-heading text-white" id="displayCardCandidateName">---</h4>
+          <span class="text-[10px] text-zinc-500 font-heading">PROVA Nº <span id="displayCardCandidateId" class="text-zinc-300">---</span></span>
         </div>
 
         <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
@@ -262,7 +266,7 @@
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest block pt-2">BOLETIM DE RESULTADO • ESTAGIÁRIO</span>
-      <h3 class="text-sm font-bold font-heading text-zinc-300 mt-1" id="resultCandidateName">! Felipe S</h3>
+      <h3 class="text-sm font-bold font-heading text-zinc-300 mt-1" id="resultCandidateName">---</h3>
 
       <!-- Círculo de Aproveitamento -->
       <div class="flex justify-center my-6">
@@ -272,7 +276,7 @@
             <circle id="resultProgressCircle" cx="72" cy="72" r="58" stroke="#ef233c" stroke-width="8" fill="none" stroke-dasharray="364.4" stroke-dashoffset="182.2" class="transition-all duration-1000 ease-out" />
           </svg>
           <div class="absolute flex flex-col items-center">
-            <span class="text-3xl font-extrabold font-heading text-white" id="resultPercentText">50%</span>
+            <span class="text-3xl font-extrabold font-heading text-white" id="resultPercentText">0%</span>
             <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading">Aproveitamento</span>
           </div>
         </div>
@@ -290,11 +294,11 @@
       <div class="grid grid-cols-3 gap-2 text-center mb-6">
         <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontos</span>
-          <span class="text-base font-bold font-heading text-white" id="resultFinalScore">5/10</span>
+          <span class="text-base font-bold font-heading text-white" id="resultFinalScore">0/10</span>
         </div>
         <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Acertos</span>
-          <span class="text-base font-bold font-heading text-white" id="resultCorrectCount">5/10</span>
+          <span class="text-base font-bold font-heading text-white" id="resultCorrectCount">0/10</span>
         </div>
         <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl border-red-500/30">
           <span class="text-[9px] uppercase font-bold text-red-500 font-heading block">Nota mínima</span>
@@ -306,7 +310,6 @@
         Você não atingiu a nota mínima. Fale com um líder no Discord para os próximos passos.
       </p>
 
-      <!-- Mensagem de Finalização Definitiva -->
       <div class="mt-6 pt-5 border-t border-zinc-800/80">
         <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
           🔒 PROVA FINALIZADA COM SUCESSO • PODE FECHAR ESTA ABA
@@ -322,4 +325,288 @@
       <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
       <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA?</h3>
       <p class="text-xs text-zinc-400 mt-2">
-        Depois de entregar não será possível alterar nenhuma resposta.
+        Depois de entregar não será possível alterar nenhuma resposta. O tempo continua correndo.
+      </p>
+      <div class="grid grid-cols-2 gap-3 mt-6">
+        <button onclick="closeConfirmModal()" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all">
+          Revisar questão
+        </button>
+        <button onclick="finishExam()" class="py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all">
+          ENTREGAR
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
+    REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS
+  </footer>
+
+  <script>
+    // 10 QUESTÕES EXATAMENTE CONFORME OS SEUS PRINTS
+    const questions = [
+      {
+        id: 1,
+        title: "QUAL É O OBJETIVO PRINCIPAL DO ESTÁGIO NA MECÂNICA REDLINE?",
+        options: [
+          { key: "A", text: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO." },
+          { key: "B", text: "PEGAR O CARGO DE LÍDER DIRETO." },
+          { key: "C", text: "SÓ PARA TER ACESSO AO DISCORD." },
+          { key: "D", text: "NÃO TEM OBJETIVO DEFINIDO." },
+          { key: "E", text: "SUBSTITUIR O DONO DA OFICINA." }
+        ],
+        correct: "A"
+      },
+      {
+        id: 2,
+        title: "QUAL A FREQUENCIA DA RADIO DA MECANICA ?",
+        options: [
+          { key: "A", text: "18" },
+          { key: "B", text: "17" },
+          { key: "C", text: "22" },
+          { key: "D", text: "13" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "B"
+      },
+      {
+        id: 3,
+        title: "É PERMITIDO MENTIR NOS DADOS DO REGISTRO?",
+        options: [
+          { key: "A", text: "SIM, SE NINGUÉM PERCEBER." },
+          { key: "B", text: "SÓ O TELEFONE PODE SER FALSO." },
+          { key: "C", text: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO." },
+          { key: "D", text: "DEPENDE DO HUMOR DO ADM." },
+          { key: "E", text: "SIM, É OBRIGATÓRIO." }
+        ],
+        correct: "C"
+      },
+      {
+        id: 4,
+        title: "QUAL VALOR DO FULL TUNING COM PARCERIA ?",
+        options: [
+          { key: "A", text: "550K" },
+          { key: "B", text: "600K" },
+          { key: "C", text: "900K" },
+          { key: "D", text: "1KK700" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS." }
+        ],
+        correct: "A"
+      },
+      {
+        id: 5,
+        title: "QUAL UNICO ITEM DE FULL TUNING DO HELICOPTERO ?",
+        options: [
+          { key: "A", text: "TURBO" },
+          { key: "B", text: "MOTOR" },
+          { key: "C", text: "TRANSMISSÃO" },
+          { key: "D", text: "FREIO" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "A"
+      },
+      {
+        id: 6,
+        title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
+        options: [
+          { key: "A", text: "1KK600" },
+          { key: "B", text: "1KK700" },
+          { key: "C", text: "600K" },
+          { key: "D", text: "1KK800" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "A"
+      },
+      {
+        id: 7,
+        title: "E PERMITIDO ANDAR COM O CARRO DA MECANICA COMO VEICULO PRÓPRIO OU PASSEIO?",
+        options: [
+          { key: "A", text: "NAO" },
+          { key: "B", text: "SIM" },
+          { key: "C", text: "SÓ AS VEZES" },
+          { key: "D", text: "TALVEZ" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "A"
+      },
+      {
+        id: 8,
+        title: "E PERMITIDO SAIR COM TOOGLE LIGADO PELA CIDADE A PASSEIO?",
+        options: [
+          { key: "A", text: "SIM" },
+          { key: "B", text: "SÓ AS VEZES" },
+          { key: "C", text: "TALVEZ" },
+          { key: "D", text: "NAO" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "D"
+      },
+      {
+        id: 9,
+        title: "QUAL UNICO CARGO QUE PODE MODIFICAR UNIFORME, E FICAR SEM DURANTE MECANICA MENOS EM ATEDIMENTO NO BLIP?",
+        options: [
+          { key: "A", text: "LIDERES" },
+          { key: "B", text: "ESTAGIARIOS" },
+          { key: "C", text: "MECANICOS" },
+          { key: "D", text: "GERENTES" },
+          { key: "E", text: "TODOS" }
+        ],
+        correct: "A"
+      },
+      {
+        id: 10,
+        title: "VOCE PODE USAR SEU PROPRIO CARRO PARA FARMAR?",
+        options: [
+          { key: "A", text: "SIM" },
+          { key: "B", text: "NAO" },
+          { key: "C", text: "DEPENDE DO HUMOR DO PEXE" },
+          { key: "D", text: "TALVEZ" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "A"
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let userAnswers = {};
+    let candidateName = "";
+    let candidateId = "";
+    let timeLeft = 90;
+    let timerInterval = null;
+    const TIME_PER_QUESTION = 90;
+
+    // VALIDAÇÃO DE CAMPOS OBRIGATÓRIOS ANTES DE INICIAR
+    function validateStartConditions() {
+      const name = document.getElementById("inputCandidateName").value.trim();
+      const id = document.getElementById("inputCandidateId").value.trim();
+      const agree = document.getElementById("checkAgree").checked;
+      const btn = document.getElementById("btnStartExam");
+
+      const nameError = document.getElementById("nameError");
+      const idError = document.getElementById("idError");
+
+      if (name.length > 0) nameError.classList.add("hidden");
+      if (id.length > 0) idError.classList.add("hidden");
+
+      if (name.length >= 2 && id.length >= 1 && agree) {
+        btn.disabled = false;
+        btn.className = "w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer";
+        btn.textContent = "COMEÇAR PROVA";
+      } else {
+        btn.disabled = true;
+        btn.className = "w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-zinc-800 text-zinc-500 cursor-not-allowed transition-all shadow-none";
+        btn.textContent = "PREENCHA NOME, ID E CONFIRME AS REGRAS";
+      }
+    }
+
+    // VERIFICAÇÃO INICIAL DO BLOQUEIO
+    window.addEventListener("DOMContentLoaded", () => {
+      checkLockStatus();
+      validateStartConditions();
+    });
+
+    function checkLockStatus() {
+      const lockData = localStorage.getItem("redline_exam_status_v1");
+      if (lockData) {
+        try {
+          const parsed = JSON.parse(lockData);
+          showBlockedScreen(parsed);
+        } catch (e) {
+          showBlockedScreen({ status: "BLOCKED", name: "Candidato", id: "---" });
+        }
+      }
+    }
+
+    // Função de Admin: caso você queira testar a prova várias vezes no seu PC
+    function adminResetLock() {
+      if (confirm("ADMIN: Deseja apagar os bloqueios e resetar o teste?")) {
+        localStorage.removeItem("redline_exam_status_v1");
+        location.reload();
+      }
+    }
+
+    function showBlockedScreen(data) {
+      document.getElementById("screen-instructions").classList.add("hidden");
+      document.getElementById("screen-exam").classList.add("hidden");
+      document.getElementById("screen-result").classList.add("hidden");
+
+      const blockedScreen = document.getElementById("screen-blocked");
+      blockedScreen.classList.remove("hidden");
+
+      const detailsBox = document.getElementById("blockedDetails");
+      if (data.status === "COMPLETED") {
+        detailsBox.innerHTML = `
+          <div><strong class="text-zinc-400">Candidato:</strong> <span class="text-white">${data.name || '---'}</span></div>
+          <div><strong class="text-zinc-400">Passaporte/ID:</strong> <span class="text-white">${data.id || '---'}</span></div>
+          <div><strong class="text-zinc-400">Resultado Oficial:</strong> <span class="${data.score >= 7 ? 'text-lime-400 font-bold' : 'text-red-400 font-bold'}">${data.score}/10 (${data.score >= 7 ? 'APROVADO' : 'REPROVADO'})</span></div>
+          <div><strong class="text-zinc-400">Entregue em:</strong> <span class="text-zinc-300">${data.date || '---'}</span></div>
+        `;
+      } else {
+        detailsBox.innerHTML = `
+          <div><strong class="text-zinc-400">Candidato:</strong> <span class="text-white">${data.name || '---'}</span></div>
+          <div><strong class="text-zinc-400">Passaporte/ID:</strong> <span class="text-white">${data.id || '---'}</span></div>
+          <div><strong class="text-zinc-400">Motivo:</strong> <span class="text-red-400 font-bold">Tentativa de recarregar a página (F5) ou abandono</span></div>
+          <div><strong class="text-zinc-400">Iniciado em:</strong> <span class="text-zinc-300">${data.date || '---'}</span></div>
+        `;
+      }
+    }
+
+    function startExam() {
+      const nameInput = document.getElementById("inputCandidateName").value.trim();
+      const idInput = document.getElementById("inputCandidateId").value.trim();
+      const agree = document.getElementById("checkAgree").checked;
+
+      if (!nameInput || !idInput || !agree) {
+        validateStartConditions();
+        return;
+      }
+
+      candidateName = nameInput;
+      candidateId = idInput;
+
+      // Trava de F5 é gravada no momento que clica em Iniciar
+      localStorage.setItem("redline_exam_status_v1", JSON.stringify({
+        status: "STARTED",
+        name: candidateName,
+        id: candidateId,
+        date: new Date().toLocaleString("pt-BR")
+      }));
+
+      document.getElementById("displayCardCandidateName").textContent = candidateName;
+      document.getElementById("displayCardCandidateId").textContent = candidateId;
+
+      document.getElementById("screen-instructions").classList.add("hidden");
+      document.getElementById("screen-exam").classList.remove("hidden");
+
+      currentQuestionIdx = 0;
+      userAnswers = {};
+      loadQuestion(0);
+    }
+
+    function loadQuestion(index) {
+      currentQuestionIdx = index;
+      const q = questions[index];
+
+      document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / 10`;
+      document.getElementById("displayQuestionTitle").textContent = q.title;
+
+      const nextBtn = document.getElementById("btnNextQuestion");
+      if (index === questions.length - 1) {
+        nextBtn.textContent = "ENTREGAR PROVA";
+      } else {
+        nextBtn.textContent = "PRÓXIMA QUESTÃO →";
+      }
+
+      const container = document.getElementById("displayOptionsContainer");
+      container.innerHTML = q.options.map(opt => {
+        const isSelected = userAnswers[q.id] === opt.key;
+        return `
+          <div 
+            onclick="selectOption('${opt.key}')" 
+            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
+          >
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
+              ${opt.key}
+            </div>
+            <span class="text-xs font-semibold ${isSelected ?
