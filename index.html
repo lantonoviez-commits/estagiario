@@ -30,7 +30,7 @@
 </head>
 <body class="min-h-screen bg-[#08080c] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- CABEÇALHO SUPERIOR COM EMBLEMA OFICIAL REDLINE -->
+  <!-- CABEÇALHO COM EMBLEMA OFICIAL REDLINE -->
   <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3.5">
@@ -69,6 +69,36 @@
 
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
+
+    <!-- 0. TELA DE BLOQUEIO ANTIFRAUDE (F5 OU JÁ REALIZADA) -->
+    <div id="screen-blocked" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <div class="w-16 h-16 rounded-full bg-red-600/10 border border-red-500/30 flex items-center justify-center mx-auto mt-2 text-2xl text-red-500">
+        🔒
+      </div>
+
+      <h2 class="text-2xl font-extrabold font-heading text-white tracking-wider mt-4">
+        ACESSO BLOQUEADO
+      </h2>
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-4 bg-red-950/60 text-red-400 border-red-800/50">
+        TENTATIVA JÁ REGISTRADA
+      </div>
+
+      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto" id="blockedDescription">
+        Esta prova é de acesso único. Nosso sistema identificou que você já iniciou ou concluiu sua avaliação. Qualquer tentativa de recarregar a página (F5) anula a prova imediatamente.
+      </p>
+
+      <div class="mt-6 p-4 rounded-xl bg-black/40 border border-zinc-800 text-left text-xs space-y-1.5" id="blockedDetails">
+        <!-- Detalhes do candidato bloqueado inseridos aqui via JS -->
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-zinc-800/80">
+        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
+          FALE COM A LIDERANÇA OU GERÊNCIA NO DISCORD PARA MAIORES ESCLARECIMENTOS.
+        </p>
+      </div>
+    </div>
 
     <!-- 1. FOLHA DE ROSTO -->
     <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
@@ -117,7 +147,7 @@
 
       <!-- Instruções -->
       <div class="space-y-2 text-xs text-zinc-400 my-5 bg-black/30 p-4 rounded-xl border border-zinc-800/60">
-        <h4 class="text-xs font-bold text-white font-heading tracking-wider uppercase mb-2">INSTRUÇÕES</h4>
+        <h4 class="text-xs font-bold text-white font-heading tracking-wider uppercase mb-2">INSTRUÇÕES DE SEGURANÇA</h4>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">1</span>
           <p>Cada questão tem <strong>90 segundos</strong>. Quando o tempo acaba, a prova avança sozinha.</p>
@@ -128,7 +158,7 @@
         </div>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
-          <p>Não atualize nem feche a página durante a prova.</p>
+          <p class="text-red-400 font-semibold">⚠️ ATENÇÃO: NÃO aperte F5 nem atualize a página. Se fizer isso, a prova será bloqueada e zerada automaticamente.</p>
         </div>
       </div>
 
@@ -136,7 +166,7 @@
       <div class="pt-2 border-t border-zinc-800 space-y-4">
         <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300 select-none">
           <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-500 focus:ring-0">
-          <span>Li as instruções e estou pronto para começar.</span>
+          <span>Li as instruções e estou ciente de que recarregar a página bloqueará meu acesso.</span>
         </label>
         <button onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all">
           COMEÇAR PROVA
@@ -227,7 +257,7 @@
 
     </div>
 
-    <!-- 3. BOLETIM DE RESULTADO (SEM BOTÃO DE REFAZER) -->
+    <!-- 3. BOLETIM DE RESULTADO (FINAL) -->
     <div id="screen-result" class="w-full max-w-xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -292,344 +322,4 @@
       <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
       <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA?</h3>
       <p class="text-xs text-zinc-400 mt-2">
-        Depois de entregar não será possível alterar nenhuma resposta. O tempo continua correndo.
-      </p>
-      <div class="grid grid-cols-2 gap-3 mt-6">
-        <button onclick="closeConfirmModal()" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all">
-          Revisar questão
-        </button>
-        <button onclick="finishExam()" class="py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all">
-          ENTREGAR
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- RODAPÉ -->
-  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
-    REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS
-  </footer>
-
-  <script>
-    // 10 QUESTÕES OFICIAIS ALINHADAS AOS SEUS PRINTS
-    const questions = [
-      {
-        id: 1,
-        title: "QUAL É O OBJETIVO PRINCIPAL DO ESTÁGIO NA MECÂNICA REDLINE?",
-        options: [
-          { key: "A", text: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO." },
-          { key: "B", text: "PEGAR O CARGO DE LÍDER DIRETO." },
-          { key: "C", text: "SÓ PARA TER ACESSO AO DISCORD." },
-          { key: "D", text: "NÃO TEM OBJETIVO DEFINIDO." },
-          { key: "E", text: "SUBSTITUIR O DONO DA OFICINA." }
-        ],
-        correct: "A"
-      },
-      {
-        id: 2,
-        title: "QUAL A FREQUENCIA DA RADIO DA MECANICA ?",
-        options: [
-          { key: "A", text: "18" },
-          { key: "B", text: "17" },
-          { key: "C", text: "22" },
-          { key: "D", text: "13" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "B"
-      },
-      {
-        id: 3,
-        title: "É PERMITIDO MENTIR NOS DADOS DO REGISTRO?",
-        options: [
-          { key: "A", text: "SIM, SE NINGUÉM PERCEBER." },
-          { key: "B", text: "SÓ O TELEFONE PODE SER FALSO." },
-          { key: "C", text: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO." },
-          { key: "D", text: "DEPENDE DO HUMOR DO ADM." },
-          { key: "E", text: "SIM, É OBRIGATÓRIO." }
-        ],
-        correct: "C"
-      },
-      {
-        id: 4,
-        title: "QUAL VALOR DO FULL TUNING COM PARCERIA ?",
-        options: [
-          { key: "A", text: "550K" },
-          { key: "B", text: "600K" },
-          { key: "C", text: "900K" },
-          { key: "D", text: "1KK700" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS." }
-        ],
-        correct: "A"
-      },
-      {
-        id: 5,
-        title: "QUAL UNICO ITEM DE FULL TUNING DO HELICOPTERO ?",
-        options: [
-          { key: "A", text: "TURBO" },
-          { key: "B", text: "MOTOR" },
-          { key: "C", text: "TRANSMISSÃO" },
-          { key: "D", text: "FREIO" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "A"
-      },
-      {
-        id: 6,
-        title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
-        options: [
-          { key: "A", text: "1KK600" },
-          { key: "B", text: "1KK700" },
-          { key: "C", text: "600K" },
-          { key: "D", text: "1KK800" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "A"
-      },
-      {
-        id: 7,
-        title: "E PERMITIDO ANDAR COM O CARRO DA MECANICA COMO VEICULO PRÓPRIO OU PASSEIO?",
-        options: [
-          { key: "A", text: "NAO" },
-          { key: "B", text: "SIM" },
-          { key: "C", text: "SÓ AS VEZES" },
-          { key: "D", text: "TALVEZ" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "A"
-      },
-      {
-        id: 8,
-        title: "E PERMITIDO SAIR COM TOOGLE LIGADO PELA CIDADE A PASSEIO?",
-        options: [
-          { key: "A", text: "SIM" },
-          { key: "B", text: "SÓ AS VEZES" },
-          { key: "C", text: "TALVEZ" },
-          { key: "D", text: "NAO" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "D"
-      },
-      {
-        id: 9,
-        title: "QUAL UNICO CARGO QUE PODE MODIFICAR UNIFORME, E FICAR SEM DURANTE MECANICA MENOS EM ATEDIMENTO NO BLIP?",
-        options: [
-          { key: "A", text: "LIDERES" },
-          { key: "B", text: "ESTAGIARIOS" },
-          { key: "C", text: "MECANICOS" },
-          { key: "D", text: "GERENTES" },
-          { key: "E", text: "TODOS" }
-        ],
-        correct: "A"
-      },
-      {
-        id: 10,
-        title: "VOCE PODE USAR SEU PROPRIO CARRO PARA FARMAR?",
-        options: [
-          { key: "A", text: "SIM" },
-          { key: "B", text: "NAO" },
-          { key: "C", text: "DEPENDE DO HUMOR DO PEXE" },
-          { key: "D", text: "TALVEZ" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
-        ],
-        correct: "A"
-      }
-    ];
-
-    let currentQuestionIdx = 0;
-    let userAnswers = {};
-    let candidateName = "";
-    let candidateId = "";
-    let timeLeft = 90;
-    let timerInterval = null;
-    const TIME_PER_QUESTION = 90;
-
-    function startExam() {
-      const nameInput = document.getElementById("inputCandidateName").value.trim();
-      const idInput = document.getElementById("inputCandidateId").value.trim();
-      const agree = document.getElementById("checkAgree").checked;
-
-      if (!nameInput) {
-        alert("Por favor, digite o seu nome antes de iniciar.");
-        return;
-      }
-      if (!agree) {
-        alert("Você precisa marcar que leu e concorda com as instruções.");
-        return;
-      }
-
-      candidateName = nameInput;
-      candidateId = idInput || "00223";
-
-      document.getElementById("displayCardCandidateName").textContent = candidateName;
-      document.getElementById("displayCardCandidateId").textContent = candidateId;
-
-      document.getElementById("screen-instructions").classList.add("hidden");
-      document.getElementById("screen-exam").classList.remove("hidden");
-
-      currentQuestionIdx = 0;
-      userAnswers = {};
-      loadQuestion(0);
-    }
-
-    function loadQuestion(index) {
-      currentQuestionIdx = index;
-      const q = questions[index];
-
-      document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / 10`;
-      document.getElementById("displayQuestionTitle").textContent = q.title;
-
-      const nextBtn = document.getElementById("btnNextQuestion");
-      if (index === questions.length - 1) {
-        nextBtn.textContent = "ENTREGAR PROVA";
-      } else {
-        nextBtn.textContent = "PRÓXIMA QUESTÃO →";
-      }
-
-      const container = document.getElementById("displayOptionsContainer");
-      container.innerHTML = q.options.map(opt => {
-        const isSelected = userAnswers[q.id] === opt.key;
-        return `
-          <div 
-            onclick="selectOption('${opt.key}')" 
-            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
-          >
-            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
-              ${opt.key}
-            </div>
-            <span class="text-xs font-semibold ${isSelected ? 'text-white' : 'text-zinc-300'}">${opt.text}</span>
-          </div>
-        `;
-      }).join('');
-
-      renderAnswerCard();
-      startTimer();
-    }
-
-    function selectOption(key) {
-      const q = questions[currentQuestionIdx];
-      userAnswers[q.id] = key;
-      loadQuestion(currentQuestionIdx);
-    }
-
-    function submitAnswer() {
-      if (currentQuestionIdx === questions.length - 1) {
-        document.getElementById("modalConfirmSubmit").classList.remove("hidden");
-      } else {
-        advanceQuestion();
-      }
-    }
-
-    function advanceQuestion() {
-      clearInterval(timerInterval);
-      if (currentQuestionIdx < questions.length - 1) {
-        loadQuestion(currentQuestionIdx + 1);
-      } else {
-        finishExam();
-      }
-    }
-
-    function closeConfirmModal() {
-      document.getElementById("modalConfirmSubmit").classList.add("hidden");
-    }
-
-    function finishExam() {
-      clearInterval(timerInterval);
-      closeConfirmModal();
-
-      document.getElementById("screen-exam").classList.add("hidden");
-      document.getElementById("screen-result").classList.remove("hidden");
-
-      let score = 0;
-      questions.forEach(q => {
-        if (userAnswers[q.id] === q.correct) {
-          score++;
-        }
-      });
-
-      const percent = (score / 10) * 100;
-      const isApproved = score >= 7;
-
-      document.getElementById("resultCandidateName").textContent = candidateName;
-      document.getElementById("resultPercentText").textContent = `${percent}%`;
-      document.getElementById("resultFinalScore").textContent = `${score}/10`;
-      document.getElementById("resultCorrectCount").textContent = `${score}/10`;
-
-      const offset = 364.4 - (364.4 * percent) / 100;
-      const circle = document.getElementById("resultProgressCircle");
-      circle.style.strokeDashoffset = offset;
-
-      const heading = document.getElementById("resultStatusHeading");
-      const badge = document.getElementById("resultStatusBadge");
-      const feedback = document.getElementById("resultFeedbackText");
-
-      if (isApproved) {
-        circle.setAttribute("stroke", "#84cc16");
-        heading.textContent = "APROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
-        badge.textContent = "ENCAMINHADO: APROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
-        feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
-      } else {
-        circle.setAttribute("stroke", "#ef233c");
-        heading.textContent = "REPROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
-        badge.textContent = "ENCAMINHADO: REPROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
-        feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
-      }
-    }
-
-    function renderAnswerCard() {
-      const grid = document.getElementById("gridAnswerCard");
-      let answeredCount = 0;
-
-      grid.innerHTML = questions.map((q, idx) => {
-        const isCurrent = idx === currentQuestionIdx;
-        const answer = userAnswers[q.id];
-        if (answer) answeredCount++;
-
-        let borderClass = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
-        if (isCurrent) {
-          borderClass = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
-        } else if (answer) {
-          borderClass = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
-        }
-
-        return `
-          <div class="border rounded-lg p-1.5 text-center transition-all ${borderClass}">
-            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
-            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${answer || (isCurrent ? '•' : '')}</span>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById("displayAnsweredCount").textContent = `${answeredCount}/10`;
-    }
-
-    function startTimer() {
-      clearInterval(timerInterval);
-      timeLeft = TIME_PER_QUESTION;
-      updateTimerDisplay();
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          advanceQuestion();
-        }
-      }, 1000);
-    }
-
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("displayTimer").textContent = 
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
-      document.getElementById("timerCircle").style.strokeDashoffset = offset;
-    }
-  </script>
-</body>
-</html>
+        Depois de entregar não será possível alterar nenhuma resposta.
