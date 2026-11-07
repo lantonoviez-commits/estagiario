@@ -34,8 +34,7 @@
   <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3.5">
-        <!-- Duplo clique no logo abre o painel do líder -->
-        <div ondblclick="openLeaderPanel()" title="Duplo clique (Liderança): Abrir Gerador de Provas" class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center cursor-pointer select-none">
+        <div onclick="openLeaderPanel()" title="Clique para abrir o Painel da Liderança" class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center cursor-pointer select-none">
           <svg class="w-11 h-11 filter drop-shadow-[0_0_8px_rgba(239,35,60,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 8C48.5 8 47.5 9 47 10.5L45.5 15C42.5 15.8 39.8 17 37.2 18.5L33 16C31.8 15.2 30.2 15.5 29.2 16.5L25 20.7C24 21.7 23.7 23.3 24.5 24.5L27 28.7C25.5 31.3 24.3 34 23.5 37L19 38.5C17.5 39 16.5 40 16.5 41.5V47.5C16.5 49 17.5 50 19 50.5L23.5 52C24.3 55 25.5 57.7 27 60.3L24.5 64.5C23.7 65.7 24 67.3 25 68.3L29.2 72.5C30.2 73.5 31.8 73.8 33 73L37.2 70.5C39.8 72 42.5 73.2 45.5 74L47 78.5C47.5 80 48.5 81 50 81H56C57.5 81 58.5 80 59 78.5L60.5 74C63.5 73.2 66.2 72 68.8 70.5L73 73C74.2 73.8 75.8 73.5 76.8 72.5L81 68.3C82 67.3 82.3 65.7 81.5 64.5L79 60.3C80.5 57.7 81.7 55 82.5 52L87 50.5C88.5 50 89.5 49 89.5 47.5V41.5C89.5 40 88.5 39 87 38.5L82.5 37C81.7 34 80.5 31.3 79 28.7L81.5 24.5C82.3 23.3 82 21.7 81 20.7L76.8 16.5C75.8 15.5 74.2 15.2 73 16L68.8 18.5C66.2 17 63.5 15.8 60.5 15L59 10.5C58.5 9 57.5 8 56 8H50Z" fill="#18181e" stroke="#ef233c" stroke-width="2.5"/>
             <circle cx="50" cy="44" r="23" fill="#0d0e14" stroke="#e5e7eb" stroke-width="1.5"/>
@@ -56,8 +55,8 @@
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <button onclick="openLeaderPanel()" class="text-[10px] font-heading font-bold bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white px-2.5 py-1 rounded border border-zinc-800 transition-all">
-          PAINEL LÍDER
+        <button onclick="openLeaderPanel()" class="text-xs font-heading font-bold bg-red-950/60 hover:bg-red-900/80 text-red-400 hover:text-white px-3 py-1.5 rounded-lg border border-red-800/60 transition-all shadow-[0_0_8px_rgba(239,35,60,0.2)]">
+          ⚙️ PAINEL LÍDER
         </button>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -76,7 +75,7 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 0. TELA DE BLOQUEIO (SEM TOKEN OU JÁ UTILIZADA) -->
+    <!-- 0. TELA DE BLOQUEIO (SEM CHAVE OU JÁ USADA) -->
     <div id="screen-unauthorized" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -92,13 +91,14 @@
       </div>
 
       <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto" id="blockedReasonText">
-        Esta avaliação requer uma chave única e individual emitida exclusivamente pela liderança da RedLine. Solicite seu link de acesso com um Líder no Discord.
+        Esta avaliação requer um link exclusivo emitido pela liderança da RedLine. Solicite seu link no Discord.
       </p>
 
-      <div class="mt-6 pt-5 border-t border-zinc-800/80">
-        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
-          REDLINE MECÂNICA • PROVA MONITORADA
-        </p>
+      <div class="mt-6 pt-5 border-t border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="text-[10px] text-zinc-500 font-heading tracking-wider uppercase">SISTEMA MONITORADO REDLINE</span>
+        <button onclick="openLeaderPanel()" class="text-xs font-heading font-bold text-red-500 hover:text-red-400 underline uppercase">
+          Sou Líder (Gerar Link)
+        </button>
       </div>
     </div>
 
@@ -107,8 +107,8 @@
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <div class="flex items-center justify-between pt-2">
-        <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • PROVA AUTORIZADA</span>
-        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50">CHAVE VÁLIDA</span>
+        <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • PROVA Nº 00223</span>
+        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50">LIBERADA</span>
       </div>
 
       <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-wide mt-2">
@@ -122,7 +122,7 @@
           <input type="text" id="inputCandidateName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
         <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID (VINCULADO À CHAVE)</label>
+          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID (VINCULADO)</label>
           <input type="text" id="inputCandidateId" readonly class="w-full bg-zinc-900/80 border border-zinc-800/80 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
         </div>
       </div>
@@ -160,7 +160,7 @@
         </div>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
-          <p class="text-red-400 font-semibold">⚠️ A chave é de uso único. Não recarregue nem feche a página.</p>
+          <p class="text-red-400 font-semibold">⚠️ A chave é de uso único. Não recarregue a página durante o teste.</p>
         </div>
       </div>
 
@@ -301,7 +301,7 @@
   <!-- MODAL: CONFIRMAR ENTREGA -->
   <div id="modalConfirmSubmit" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style="display: none;">
     <div class="w-full max-w-sm bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+      <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
       <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA?</h3>
       <p class="text-xs text-zinc-400 mt-2">
         Depois de entregar não será possível alterar nenhuma resposta.
@@ -324,23 +324,23 @@
       
       <div class="flex items-center justify-between mt-2">
         <h3 class="text-lg font-extrabold font-heading text-white tracking-wider">
-          PAINEL SECRETO DA LIDERANÇA
+          PAINEL DA LIDERANÇA
         </h3>
-        <button onclick="closeLeaderPanel()" class="text-zinc-500 hover:text-white font-bold text-sm">✕</button>
+        <button onclick="closeLeaderPanel()" class="text-zinc-500 hover:text-white font-bold text-sm px-2">✕</button>
       </div>
-      <p class="text-xs text-zinc-400 mt-1">Gere links protegidos com chave única para novos candidatos.</p>
+      <p class="text-xs text-zinc-400 mt-1">Autentique-se para gerar links de acesso único aos candidatos.</p>
 
       <!-- Autenticação do Líder -->
       <div id="leaderAuthBox" class="space-y-3 my-4">
         <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">SENHA DA LIDERANÇA</label>
-          <input type="password" id="adminPassInput" placeholder="Ex: redline2026" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DA LIDERANÇA</label>
+          <input type="password" id="adminPassInput" placeholder="Digite a senha (ex: redline2026)" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
         <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">ID MESTRE</label>
-          <input type="text" id="adminIdInput" placeholder="Ex: 2026" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">ID MESTRE</label>
+          <input type="text" id="adminIdInput" placeholder="Digite o ID mestre (ex: 2026)" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
-        <button onclick="verifyLeaderAuth()" class="w-full py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white transition-all">
+        <button type="button" onclick="verifyLeaderAuth()" class="w-full py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white transition-all shadow-[0_0_12px_rgba(239,35,60,0.4)]">
           DESBLOQUEAR GERADOR
         </button>
       </div>
@@ -348,7 +348,7 @@
       <!-- Gerador Desbloqueado -->
       <div id="leaderGeneratorBox" class="space-y-3 my-4" style="display: none;">
         <div class="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-[11px] text-emerald-400 flex items-center gap-2">
-          <span>✓</span> <strong>Liderança Autenticada</strong> (Chave: redline2026 / 2026)
+          <span>✓</span> <strong>Liderança Autenticada</strong>
         </div>
 
         <div>
@@ -361,7 +361,7 @@
           <input type="text" id="genCandidateName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
 
-        <button onclick="generateExamLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all">
+        <button type="button" onclick="generateExamLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all">
           GERAR E COPIAR LINK DA PROVA
         </button>
 
@@ -374,8 +374,12 @@
     </div>
   </div>
 
-  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
-    REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS
+  <!-- RODAPÉ COM BOTÃO VISÍVEL DE LÍDER -->
+  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 px-4 flex flex-col sm:flex-row items-center justify-between text-[10px] text-zinc-600 font-heading tracking-wider">
+    <span>REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS</span>
+    <button onclick="openLeaderPanel()" class="mt-2 sm:mt-0 text-red-500 hover:text-red-400 font-bold uppercase transition-all bg-red-950/40 px-3 py-1.5 rounded-lg border border-red-900/50">
+      ⚙️ Painel do Líder (Gerar Provas)
+    </button>
   </footer>
 
   <script>
@@ -514,7 +518,6 @@
     let timerInterval = null;
     const TIME_PER_QUESTION = 90;
 
-    // ALGORITMO DE ASSINATURA DA CHAVE
     function createToken(id) {
       let hash = 0;
       const str = `${MASTER_SECRET}_REDLINE_${id}_SECURE`;
@@ -525,11 +528,9 @@
       return Math.abs(hash).toString(16).toUpperCase();
     }
 
-    // INICIALIZAÇÃO E VERIFICAÇÃO DE URL
     window.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
 
-      // Abre o painel se a URL tiver ?admin=1
       if (urlParams.get("admin") === "1") {
         openLeaderPanel();
       }
@@ -538,17 +539,14 @@
       const paramToken = urlParams.get("chave") || urlParams.get("token");
       const paramNome = urlParams.get("nome");
 
-      // Verificação de acesso Master direto
       if (paramId === MASTER_ID && paramToken === MASTER_SECRET) {
         setupAuthorizedScreen("Líder / Teste", MASTER_ID, "MASTER");
         return;
       }
 
-      // Validação da chave do candidato
       if (paramId && paramToken) {
         const expectedToken = createToken(paramId);
         if (paramToken === expectedToken) {
-          // Verifica se este token já foi consumido nesta máquina
           if (localStorage.getItem(`redline_used_${paramToken}`)) {
             showUnauthorized("CHAVE JÁ UTILIZADA", "Esta chave de acesso já realizou a avaliação e foi consumida. Não é permitido refazer a prova.");
             return;
@@ -561,8 +559,7 @@
         }
       }
 
-      // Se não tem parâmetros válidos, bloqueia
-      showUnauthorized("ACESSO RESTRITO", "Esta avaliação exige um link com chave única individual emitida pela liderança da RedLine.");
+      showUnauthorized("ACESSO RESTRITO", "Esta avaliação exige um link com chave única emitido pela liderança da RedLine.");
     });
 
     function setupAuthorizedScreen(name, id, token) {
@@ -589,13 +586,18 @@
       screen.style.display = "block";
     }
 
-    // PAINEL DO LÍDER
     function openLeaderPanel() {
-      document.getElementById("modalLeaderPanel").style.display = "flex";
+      const modal = document.getElementById("modalLeaderPanel");
+      modal.style.setProperty("display", "flex", "important");
+      setTimeout(() => {
+        const passInput = document.getElementById("adminPassInput");
+        if (passInput) passInput.focus();
+      }, 50);
     }
 
     function closeLeaderPanel() {
-      document.getElementById("modalLeaderPanel").style.display = "none";
+      const modal = document.getElementById("modalLeaderPanel");
+      modal.style.setProperty("display", "none", "important");
     }
 
     function verifyLeaderAuth() {
@@ -605,6 +607,9 @@
       if (pass === MASTER_SECRET && id === MASTER_ID) {
         document.getElementById("leaderAuthBox").style.display = "none";
         document.getElementById("leaderGeneratorBox").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("genCandidateId").focus();
+        }, 50);
       } else {
         alert("Credenciais de liderança incorretas!");
       }
@@ -626,7 +631,6 @@
         finalUrl += `&nome=${encodeURIComponent(name)}`;
       }
 
-      // Copia para o Clipboard
       navigator.clipboard.writeText(finalUrl).then(() => {
         document.getElementById("genResultUrl").value = finalUrl;
         document.getElementById("genResultBox").style.display = "block";
@@ -637,7 +641,6 @@
       });
     }
 
-    // CONTROLE DA PROVA
     function iniciarProva() {
       const nameInput = document.getElementById("inputCandidateName");
       const checkAgree = document.getElementById("checkAgree");
@@ -657,7 +660,6 @@
 
       candidateName = name;
 
-      // Se não for teste master, consome a chave imediatamente
       if (currentToken && currentToken !== "MASTER") {
         localStorage.setItem(`redline_used_${currentToken}`, "true");
       }
@@ -689,3 +691,151 @@
 
       const container = document.getElementById("displayOptionsContainer");
       container.innerHTML = q.options.map(opt => {
+        const isSelected = userAnswers[q.id] === opt.key;
+        return `
+          <div 
+            onclick="selectOption('${opt.key}')" 
+            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
+          >
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
+              ${opt.key}
+            </div>
+            <span class="text-xs font-semibold ${isSelected ? 'text-white' : 'text-zinc-300'}">${opt.text}</span>
+          </div>
+        `;
+      }).join('');
+
+      renderAnswerCard();
+      startTimer();
+    }
+
+    function selectOption(key) {
+      const q = questions[currentQuestionIdx];
+      userAnswers[q.id] = key;
+      loadQuestion(currentQuestionIdx);
+    }
+
+    function submitAnswer() {
+      if (currentQuestionIdx === questions.length - 1) {
+        document.getElementById("modalConfirmSubmit").style.display = "flex";
+      } else {
+        advanceQuestion();
+      }
+    }
+
+    function advanceQuestion() {
+      clearInterval(timerInterval);
+      if (currentQuestionIdx < questions.length - 1) {
+        loadQuestion(currentQuestionIdx + 1);
+      } else {
+        finishExam();
+      }
+    }
+
+    function closeConfirmModal() {
+      document.getElementById("modalConfirmSubmit").style.display = "none";
+    }
+
+    function finishExam() {
+      clearInterval(timerInterval);
+      closeConfirmModal();
+
+      document.getElementById("screen-exam").style.display = "none";
+      document.getElementById("screen-instructions").style.display = "none";
+      document.getElementById("screen-result").style.display = "block";
+
+      let score = 0;
+      questions.forEach(q => {
+        if (userAnswers[q.id] === q.correct) {
+          score++;
+        }
+      });
+
+      const percent = (score / 10) * 100;
+      const isApproved = score >= 7;
+
+      document.getElementById("resultCandidateName").textContent = candidateName;
+      document.getElementById("resultPercentText").textContent = `${percent}%`;
+      document.getElementById("resultFinalScore").textContent = `${score}/10`;
+      document.getElementById("resultCorrectCount").textContent = `${score}/10`;
+
+      const offset = 364.4 - (364.4 * percent) / 100;
+      const circle = document.getElementById("resultProgressCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+
+      const heading = document.getElementById("resultStatusHeading");
+      const badge = document.getElementById("resultStatusBadge");
+      const feedback = document.getElementById("resultFeedbackText");
+
+      if (isApproved) {
+        if (circle) circle.setAttribute("stroke", "#84cc16");
+        heading.textContent = "APROVADO";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
+        badge.textContent = "ENCAMINHADO: APROVADO";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
+        feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
+      } else {
+        if (circle) circle.setAttribute("stroke", "#ef233c");
+        heading.textContent = "REPROVADO";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
+        badge.textContent = "ENCAMINHADO: REPROVADO";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
+        feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
+      }
+    }
+
+    function renderAnswerCard() {
+      const grid = document.getElementById("gridAnswerCard");
+      let answeredCount = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const isCurrent = idx === currentQuestionIdx;
+        const answer = userAnswers[q.id];
+        if (answer) answeredCount++;
+
+        let borderClass = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
+        if (isCurrent) {
+          borderClass = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
+        } else if (answer) {
+          borderClass = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
+        }
+
+        return `
+          <div class="border rounded-lg p-1.5 text-center transition-all ${borderClass}">
+            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${answer || (isCurrent ? '•' : '')}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("displayAnsweredCount").textContent = `${answeredCount}/10`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = TIME_PER_QUESTION;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          advanceQuestion();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("displayTimer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
+      const circle = document.getElementById("timerCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+    }
+  </script>
+</body>
+</html>
