@@ -75,7 +75,7 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 0. TELA DE BLOQUEIO (SEM CHAVE OU JÁ USADA) -->
+    <!-- 0. TELA DE BLOQUEIO -->
     <div id="screen-unauthorized" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <!-- 1. FOLHA DE ROSTO (COM CHAVE VÁLIDA) -->
+    <!-- 1. FOLHA DE ROSTO -->
     <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" style="display: none;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -289,6 +289,11 @@
 
       <p class="text-xs text-zinc-400" id="resultFeedbackText"></p>
 
+      <!-- Status de Envio do Discord -->
+      <div id="discordStatusMsg" class="mt-4 p-2.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-[11px] text-zinc-400">
+        Enviando relatório oficial para a liderança...
+      </div>
+
       <div class="mt-6 pt-5 border-t border-zinc-800/80">
         <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
           🔒 PROVA FINALIZADA COM SUCESSO • CHAVE CONSUMIDA DEFINITIVAMENTE
@@ -304,7 +309,7 @@
       <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
       <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA?</h3>
       <p class="text-xs text-zinc-400 mt-2">
-        Depois de entregar não será possível alterar nenhuma resposta.
+        Depois de entregar não será possível alterar nenhuma resposta. O resultado será enviado diretamente à liderança.
       </p>
       <div class="grid grid-cols-2 gap-3 mt-6">
         <button type="button" onclick="closeConfirmModal()" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all cursor-pointer">
@@ -317,7 +322,7 @@
     </div>
   </div>
 
-  <!-- MODAL: PAINEL SECRETO DO LÍDER (GERADOR DE LINKS) -->
+  <!-- MODAL: PAINEL SECRETO DO LÍDER -->
   <div id="modalLeaderPanel" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4" style="display: none;">
     <div class="w-full max-w-md bg-[#0f1016] border border-red-800/80 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
@@ -383,132 +388,138 @@
   </footer>
 
   <script>
+    // ==========================================
+    // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
+    // ==========================================
+    const DISCORD_WEBHOOK_URL = "SUA_URL_DO_WEBHOOK_AQUI"; // Cole aqui o webhook do Discord
     const MASTER_SECRET = "redline2026";
     const MASTER_ID = "2026";
 
-    const questions = [
+    // QUESTÕES COM TEXTO DA RESPOSTA CORRETA FIXO (GABARITO INFALÍVEL)
+    const baseQuestions = [
       {
         id: 1,
         title: "QUAL É O OBJETIVO PRINCIPAL DO ESTÁGIO NA MECÂNICA REDLINE?",
         options: [
-          { key: "A", text: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO." },
-          { key: "B", text: "PEGAR O CARGO DE LÍDER DIRETO." },
-          { key: "C", text: "SÓ PARA TER ACESSO AO DISCORD." },
-          { key: "D", text: "NÃO TEM OBJETIVO DEFINIDO." },
-          { key: "E", text: "SUBSTITUIR O DONO DA OFICINA." }
+          "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO.",
+          "PEGAR O CARGO DE LÍDER DIRETO.",
+          "SÓ PARA TER ACESSO AO DISCORD.",
+          "NÃO TEM OBJETIVO DEFINIDO.",
+          "SUBSTITUIR O DONO DA OFICINA."
         ],
-        correct: "A"
+        correctText: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO."
       },
       {
         id: 2,
         title: "QUAL A FREQUENCIA DA RADIO DA MECANICA ?",
         options: [
-          { key: "A", text: "18" },
-          { key: "B", text: "17" },
-          { key: "C", text: "22" },
-          { key: "D", text: "13" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "18",
+          "17",
+          "22",
+          "13",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "B"
+        correctText: "17"
       },
       {
         id: 3,
         title: "É PERMITIDO MENTIR NOS DADOS DO REGISTRO?",
         options: [
-          { key: "A", text: "SIM, SE NINGUÉM PERCEBER." },
-          { key: "B", text: "SÓ O TELEFONE PODE SER FALSO." },
-          { key: "C", text: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO." },
-          { key: "D", text: "DEPENDE DO HUMOR DO ADM." },
-          { key: "E", text: "SIM, É OBRIGATÓRIO." }
+          "SIM, SE NINGUÉM PERCEBER.",
+          "SÓ O TELEFONE PODE SER FALSO.",
+          "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO.",
+          "DEPENDE DO HUMOR DO ADM.",
+          "SIM, É OBRIGATÓRIO."
         ],
-        correct: "C"
+        correctText: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO."
       },
       {
         id: 4,
         title: "QUAL VALOR DO FULL TUNING COM PARCERIA ?",
         options: [
-          { key: "A", text: "550K" },
-          { key: "B", text: "600K" },
-          { key: "C", text: "900K" },
-          { key: "D", text: "1KK700" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS." }
+          "550K",
+          "600K",
+          "900K",
+          "1KK700",
+          "NENHUMA DAS ALTERNATIVAS."
         ],
-        correct: "A"
+        correctText: "550K"
       },
       {
         id: 5,
         title: "QUAL UNICO ITEM DE FULL TUNING DO HELICOPTERO ?",
         options: [
-          { key: "A", text: "TURBO" },
-          { key: "B", text: "MOTOR" },
-          { key: "C", text: "TRANSMISSÃO" },
-          { key: "D", text: "FREIO" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "TURBO",
+          "MOTOR",
+          "TRANSMISSÃO",
+          "FREIO",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "A"
+        correctText: "TURBO"
       },
       {
         id: 6,
         title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
         options: [
-          { key: "A", text: "1KK600" },
-          { key: "B", text: "1KK700" },
-          { key: "C", text: "600K" },
-          { key: "D", text: "1KK800" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "1KK600",
+          "1KK700",
+          "600K",
+          "1KK800",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "A"
+        correctText: "1KK600"
       },
       {
         id: 7,
         title: "E PERMITIDO ANDAR COM O CARRO DA MECANICA COMO VEICULO PRÓPRIO OU PASSEIO?",
         options: [
-          { key: "A", text: "NAO" },
-          { key: "B", text: "SIM" },
-          { key: "C", text: "SÓ AS VEZES" },
-          { key: "D", text: "TALVEZ" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "NAO",
+          "SIM",
+          "SÓ AS VEZES",
+          "TALVEZ",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "A"
+        correctText: "NAO"
       },
       {
         id: 8,
         title: "E PERMITIDO SAIR COM TOOGLE LIGADO PELA CIDADE A PASSEIO?",
         options: [
-          { key: "A", text: "SIM" },
-          { key: "B", text: "SÓ AS VEZES" },
-          { key: "C", text: "TALVEZ" },
-          { key: "D", text: "NAO" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "SIM",
+          "SÓ AS VEZES",
+          "TALVEZ",
+          "NAO",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "D"
+        correctText: "NAO"
       },
       {
         id: 9,
         title: "QUAL UNICO CARGO QUE PODE MODIFICAR UNIFORME, E FICAR SEM DURANTE MECANICA MENOS EM ATEDIMENTO NO BLIP?",
         options: [
-          { key: "A", text: "LIDERES" },
-          { key: "B", text: "ESTAGIARIOS" },
-          { key: "C", text: "MECANICOS" },
-          { key: "D", text: "GERENTES" },
-          { key: "E", text: "TODOS" }
+          "LIDERES",
+          "ESTAGIARIOS",
+          "MECANICOS",
+          "GERENTES",
+          "TODOS"
         ],
-        correct: "A"
+        correctText: "LIDERES"
       },
       {
         id: 10,
         title: "VOCE PODE USAR SEU PROPRIO CARRO PARA FARMAR?",
         options: [
-          { key: "A", text: "SIM" },
-          { key: "B", text: "NAO" },
-          { key: "C", text: "DEPENDE DO HUMOR DO PEXE" },
-          { key: "D", text: "TALVEZ" },
-          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+          "SIM",
+          "NAO",
+          "DEPENDE DO HUMOR DO PEXE",
+          "TALVEZ",
+          "NENHUMA DAS ALTERNATIVAS"
         ],
-        correct: "A"
+        correctText: "SIM"
       }
     ];
 
+    let questions = [];
     let currentQuestionIdx = 0;
     let userAnswers = {};
     let candidateName = "";
@@ -517,6 +528,33 @@
     let timeLeft = 90;
     let timerInterval = null;
     const TIME_PER_QUESTION = 90;
+
+    // EMBARALHAMENTO ALEATÓRIO DAS ALTERNATIVAS
+    function shuffleArray(arr) {
+      const array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function buildRandomizedQuestions() {
+      const letters = ["A", "B", "C", "D", "E"];
+      questions = baseQuestions.map(q => {
+        const shuffledTexts = shuffleArray(q.options);
+        const options = shuffledTexts.map((text, idx) => ({
+          key: letters[idx],
+          text: text
+        }));
+        return {
+          id: q.id,
+          title: q.title,
+          options: options,
+          correctText: q.correctText
+        };
+      });
+    }
 
     function createToken(id) {
       let hash = 0;
@@ -660,9 +698,13 @@
 
       candidateName = name;
 
+      // Consome a chave se não for o acesso mestre
       if (currentToken && currentToken !== "MASTER") {
         localStorage.setItem(`redline_used_${currentToken}`, "true");
       }
+
+      // Cria a ordem aleatória das alternativas para esta sessão de prova
+      buildRandomizedQuestions();
 
       document.getElementById("displayCardCandidateName").textContent = candidateName;
       document.getElementById("displayCardCandidateId").textContent = candidateId;
@@ -691,10 +733,10 @@
 
       const container = document.getElementById("displayOptionsContainer");
       container.innerHTML = q.options.map(opt => {
-        const isSelected = userAnswers[q.id] === opt.key;
+        const isSelected = userAnswers[q.id]?.text === opt.text;
         return `
           <div 
-            onclick="selectOption('${opt.key}')" 
+            onclick="selectOption('${opt.key}', '${encodeURIComponent(opt.text)}')" 
             class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
           >
             <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
@@ -709,9 +751,10 @@
       startTimer();
     }
 
-    function selectOption(key) {
+    function selectOption(key, encodedText) {
       const q = questions[currentQuestionIdx];
-      userAnswers[q.id] = key;
+      const text = decodeURIComponent(encodedText);
+      userAnswers[q.id] = { key: key, text: text };
       loadQuestion(currentQuestionIdx);
     }
 
@@ -744,9 +787,10 @@
       document.getElementById("screen-instructions").style.display = "none";
       document.getElementById("screen-result").style.display = "block";
 
+      // Cálculo de nota baseado no texto exato da resposta (imune à posição embaralhada)
       let score = 0;
       questions.forEach(q => {
-        if (userAnswers[q.id] === q.correct) {
+        if (userAnswers[q.id] && userAnswers[q.id].text === q.correctText) {
           score++;
         }
       });
@@ -782,60 +826,75 @@
         badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
         feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
       }
+
+      sendDiscordWebhook(score, percent, isApproved);
     }
 
-    function renderAnswerCard() {
-      const grid = document.getElementById("gridAnswerCard");
-      let answeredCount = 0;
+    function sendDiscordWebhook(score, percent, isApproved) {
+      const statusMsg = document.getElementById("discordStatusMsg");
 
-      grid.innerHTML = questions.map((q, idx) => {
-        const isCurrent = idx === currentQuestionIdx;
-        const answer = userAnswers[q.id];
-        if (answer) answeredCount++;
+      if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === "SUA_URL_DO_WEBHOOK_AQUI") {
+        statusMsg.textContent = "ℹ️ Webhook não configurado no código. Resultado salvo localmente.";
+        statusMsg.className = "mt-4 p-2.5 rounded-lg bg-zinc-900 border border-zinc-700 text-[11px] text-zinc-400";
+        return;
+      }
 
-        let borderClass = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
-        if (isCurrent) {
-          borderClass = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
-        } else if (answer) {
-          borderClass = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
-        }
+      const payload = {
+        username: "Central de Provas • RedLine",
+        avatar_url: "https://i.imgur.com/8Q5N8mB.png",
+        embeds: [
+          {
+            title: isApproved ? "✅ CANDIDATO APROVADO • ESTAGIÁRIO" : "❌ CANDIDATO REPROVADO • ESTAGIÁRIO",
+            color: isApproved ? 0x84cc16 : 0xef233c,
+            description: `Um candidato concluiu a prova oficial de estagiário da **Mecânica RedLine**.`,
+            fields: [
+              {
+                name: "👤 Candidato",
+                value: `**${candidateName}**`,
+                inline: true
+              },
+              {
+                name: "🆔 Passaporte / ID",
+                value: `\`${candidateId}\``,
+                inline: true
+              },
+              {
+                name: "📊 Aproveitamento",
+                value: `**${score}/10** (${percent}%)`,
+                inline: true
+              },
+              {
+                name: "🎯 Nota Mínima",
+                value: "7 / 10 pontos",
+                inline: true
+              },
+              {
+                name: "🔑 Chave de Acesso",
+                value: `\`${currentToken || "ACESSO_MASTER"}\``,
+                inline: true
+              },
+              {
+                name: "📅 Horário de Conclusão",
+                value: new Date().toLocaleString("pt-BR"),
+                inline: true
+              }
+            ],
+            footer: {
+              text: "RedLine Mecânica • Central de Avaliação e Auditoria"
+            },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
 
-        return `
-          <div class="border rounded-lg p-1.5 text-center transition-all ${borderClass}">
-            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
-            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${answer || (isCurrent ? '•' : '')}</span>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById("displayAnsweredCount").textContent = `${answeredCount}/10`;
-    }
-
-    function startTimer() {
-      clearInterval(timerInterval);
-      timeLeft = TIME_PER_QUESTION;
-      updateTimerDisplay();
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          advanceQuestion();
-        }
-      }, 1000);
-    }
-
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("displayTimer").textContent = 
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
-      const circle = document.getElementById("timerCircle");
-      if (circle) circle.style.strokeDashoffset = offset;
-    }
-  </script>
-</body>
-</html>
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          statusMsg.textContent = "✓ Relatório oficial enviado e registrado com sucesso no Discord da liderança!";
+          statusMsg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
+        } else {
+          statusMsg.textContent
