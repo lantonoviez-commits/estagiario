@@ -20,68 +20,78 @@
     .hazard-stripe {
       background: repeating-linear-gradient(
         -45deg,
-        #f59e0b,
-        #f59e0b 12px,
-        #000000 12px,
-        #000000 24px
+        #ef233c,
+        #ef233c 12px,
+        #08080c 12px,
+        #08080c 24px
       );
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#07070a] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
+<body class="min-h-screen bg-[#08080c] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- CABEÇALHO SUPERIOR -->
-  <header class="border-b border-zinc-900 bg-[#090a0f]/90 backdrop-blur-md sticky top-0 z-40">
+  <!-- CABEÇALHO SUPERIOR COM EMBLEMA OFICIAL REDLINE -->
+  <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm shadow-[0_0_12px_rgba(239,35,60,0.5)]">
-          🔧
+      <div class="flex items-center gap-3.5">
+        <div class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center">
+          <svg class="w-11 h-11 filter drop-shadow-[0_0_8px_rgba(239,35,60,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 8C48.5 8 47.5 9 47 10.5L45.5 15C42.5 15.8 39.8 17 37.2 18.5L33 16C31.8 15.2 30.2 15.5 29.2 16.5L25 20.7C24 21.7 23.7 23.3 24.5 24.5L27 28.7C25.5 31.3 24.3 34 23.5 37L19 38.5C17.5 39 16.5 40 16.5 41.5V47.5C16.5 49 17.5 50 19 50.5L23.5 52C24.3 55 25.5 57.7 27 60.3L24.5 64.5C23.7 65.7 24 67.3 25 68.3L29.2 72.5C30.2 73.5 31.8 73.8 33 73L37.2 70.5C39.8 72 42.5 73.2 45.5 74L47 78.5C47.5 80 48.5 81 50 81H56C57.5 81 58.5 80 59 78.5L60.5 74C63.5 73.2 66.2 72 68.8 70.5L73 73C74.2 73.8 75.8 73.5 76.8 72.5L81 68.3C82 67.3 82.3 65.7 81.5 64.5L79 60.3C80.5 57.7 81.7 55 82.5 52L87 50.5C88.5 50 89.5 49 89.5 47.5V41.5C89.5 40 88.5 39 87 38.5L82.5 37C81.7 34 80.5 31.3 79 28.7L81.5 24.5C82.3 23.3 82 21.7 81 20.7L76.8 16.5C75.8 15.5 74.2 15.2 73 16L68.8 18.5C66.2 17 63.5 15.8 60.5 15L59 10.5C58.5 9 57.5 8 56 8H50Z" fill="#18181e" stroke="#ef233c" stroke-width="2.5"/>
+            <circle cx="50" cy="44" r="23" fill="#0d0e14" stroke="#e5e7eb" stroke-width="1.5"/>
+            <path d="M40 32L50 44M60 32L50 44" stroke="#ef233c" stroke-width="3" stroke-linecap="round"/>
+            <rect x="36" y="27" width="8" height="6" rx="1.5" fill="#e5e7eb"/>
+            <rect x="56" y="27" width="8" height="6" rx="1.5" fill="#e5e7eb"/>
+            <circle cx="50" cy="44" r="6" fill="#ef233c"/>
+            <circle cx="50" cy="44" r="2.5" fill="#000000"/>
+            <rect x="18" y="52" width="64" height="15" rx="3" fill="#08080c" stroke="#ef233c" stroke-width="1.8"/>
+            <text x="50" y="63" font-family="'Rajdhani', sans-serif" font-weight="800" font-size="10" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">RED<tspan fill="#ef233c">LINE</tspan></text>
+          </svg>
         </div>
         <div>
-          <h1 class="text-sm font-bold font-heading tracking-wider text-white leading-none">
-            RED<span class="text-red-500">LINE</span>
+          <h1 class="text-base font-bold font-heading tracking-wider text-white leading-none">
+            REDLINE <span class="text-red-500">MECÂNICA</span>
           </h1>
-          <p class="text-[9px] text-zinc-500 tracking-widest font-heading">MECÂNICA • CENTRAL DE PROVAS</p>
+          <p class="text-[9px] text-zinc-500 tracking-widest font-heading mt-0.5">CENTRAL DE AVALIAÇÃO • ESTAGIÁRIO</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span class="text-[11px] font-heading font-bold text-zinc-400 uppercase tracking-wider">Sistema online</span>
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="text-[11px] font-heading font-bold text-zinc-400 uppercase tracking-wider">SISTEMA ONLINE</span>
       </div>
     </div>
   </header>
 
-  <!-- SUBHEADER / NAVEGAÇÃO -->
-  <div class="max-w-7xl mx-auto w-full px-4 pt-3 flex items-center justify-between text-xs font-heading tracking-wider">
-    <span class="text-amber-500 font-bold tracking-widest">PROVA • ESTAGIÁRIO</span>
-    <span class="text-zinc-500">Mecânica RedLine</span>
+  <!-- NAVEGAÇÃO -->
+  <div class="max-w-5xl mx-auto w-full px-4 pt-4 flex items-center justify-between text-xs font-heading tracking-wider">
+    <span class="text-red-500 font-bold tracking-widest">— PROVA • ESTAGIÁRIO</span>
+    <span class="text-zinc-500">Mecânica RedLine - Fluxo</span>
   </div>
 
   <!-- CONTEÚDO PRINCIPAL -->
-  <main class="max-w-5xl mx-auto w-full px-4 py-6 flex-1 flex items-center justify-center">
+  <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 1. TELA: FOLHA DE ROSTO (INICIAL) -->
-    <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016]/95 border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+    <!-- 1. FOLHA DE ROSTO -->
+    <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <div class="flex items-center justify-between pt-2">
-        <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • ESTAGIÁRIO</span>
-        <span class="px-2 py-0.5 rounded text-[10px] font-heading font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">OFICIAL</span>
+        <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • PROVA Nº 00223</span>
+        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-red-950/60 text-red-400 border border-red-800/50">OFICIAL</span>
       </div>
 
       <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-wide mt-2">
-        PROVA DE ESTAGIÁRIO REDLINE
+        PROVA DE ESTAGIÁRIO <span class="text-red-500">REDLINE</span>
       </h2>
 
       <!-- Dados do Candidato -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5 bg-zinc-900/60 border border-zinc-800/80 p-4 rounded-xl">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5 bg-zinc-900/40 border border-zinc-800/80 p-4 rounded-xl">
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">NOME DO CANDIDATO</label>
-          <input type="text" id="inputCandidateName" placeholder="Ex: Felipe S" class="w-full bg-black/50 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500 mt-1">
+          <input type="text" id="inputCandidateName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID</label>
-          <input type="number" id="inputCandidateId" placeholder="Ex: 00223" class="w-full bg-black/50 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-500 mt-1">
+          <input type="number" id="inputCandidateId" placeholder="Ex: 00223" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
       </div>
 
@@ -93,15 +103,15 @@
         </div>
         <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Tempo / qst</span>
-          <span class="text-base font-bold font-heading text-white">100s</span>
+          <span class="text-base font-bold font-heading text-red-400">90s</span>
         </div>
         <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontuação máx.</span>
           <span class="text-base font-bold font-heading text-white">10 pts</span>
         </div>
-        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl border-amber-500/30">
-          <span class="text-[9px] uppercase font-bold text-amber-500 font-heading block">Nota mínima</span>
-          <span class="text-base font-bold font-heading text-amber-400">7 pts</span>
+        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl border-red-500/30">
+          <span class="text-[9px] uppercase font-bold text-red-500 font-heading block">Nota mínima</span>
+          <span class="text-base font-bold font-heading text-red-400">7 pts</span>
         </div>
       </div>
 
@@ -109,56 +119,56 @@
       <div class="space-y-2 text-xs text-zinc-400 my-5 bg-black/30 p-4 rounded-xl border border-zinc-800/60">
         <h4 class="text-xs font-bold text-white font-heading tracking-wider uppercase mb-2">INSTRUÇÕES</h4>
         <div class="flex items-start gap-2.5">
-          <span class="w-4 h-4 rounded bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">1</span>
-          <p>Cada questão tem 100 segundos. Ao esgotar o tempo, a prova avança sozinha.</p>
+          <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">1</span>
+          <p>Cada questão tem <strong>90 segundos</strong>. Quando o tempo acaba, a prova avança sozinha.</p>
         </div>
         <div class="flex items-start gap-2.5">
-          <span class="w-4 h-4 rounded bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">2</span>
+          <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">2</span>
           <p>Não é possível voltar para questões anteriores. Confirme antes de avançar.</p>
         </div>
         <div class="flex items-start gap-2.5">
-          <span class="w-4 h-4 rounded bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
+          <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
           <p>Não atualize nem feche a página durante a prova.</p>
         </div>
       </div>
 
-      <!-- Aceite e Iniciar -->
+      <!-- Aceite e Início -->
       <div class="pt-2 border-t border-zinc-800 space-y-4">
         <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-300 select-none">
-          <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-amber-500 focus:ring-0">
+          <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-500 focus:ring-0">
           <span>Li as instruções e estou pronto para começar.</span>
         </label>
-        <button onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+        <button onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all">
           COMEÇAR PROVA
         </button>
       </div>
     </div>
 
-    <!-- 2. TELA: EXECUÇÃO DA QUESTÃO -->
+    <!-- 2. EXECUÇÃO DA QUESTÃO -->
     <div id="screen-exam" class="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 hidden">
 
-      <!-- Coluna da Pergunta (8 colunas) -->
-      <div class="lg:col-span-8 bg-[#0f1016]/95 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+      <!-- Coluna Principal (8 colunas) -->
+      <div class="lg:col-span-8 bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
         <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
 
         <div>
           <!-- Topo da Questão -->
-          <div class="flex items-center justify-between pt-1 border-b border-zinc-800/80 pb-3">
+          <div class="flex items-center justify-between pt-1 border-b border-zinc-800 pb-3">
             <div>
               <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider block">PROVA DE ESTAGIÁRIO REDLINE</span>
               <h3 class="text-xl font-extrabold font-heading text-white tracking-wide mt-0.5">
-                QUESTÃO <span class="text-amber-500" id="displayQuestionIndex">01 / 10</span>
+                QUESTÃO <span class="text-red-500" id="displayQuestionIndex">01 / 10</span>
               </h3>
             </div>
 
-            <!-- Contador Circular -->
+            <!-- Contador Circular (90s) -->
             <div class="flex items-center gap-2">
               <div class="relative w-12 h-12 flex items-center justify-center">
                 <svg class="w-12 h-12 -rotate-90">
                   <circle cx="24" cy="24" r="20" stroke="#27272a" stroke-width="3" fill="none" />
-                  <circle id="timerCircle" cx="24" cy="24" r="20" stroke="#f59e0b" stroke-width="3" fill="none" stroke-dasharray="125.6" stroke-dashoffset="0" class="transition-all duration-1000 ease-linear" />
+                  <circle id="timerCircle" cx="24" cy="24" r="20" stroke="#ef233c" stroke-width="3" fill="none" stroke-dasharray="125.6" stroke-dashoffset="0" class="transition-all duration-1000 ease-linear" />
                 </svg>
-                <span class="absolute font-heading font-bold text-xs text-white" id="displayTimer">01:40</span>
+                <span class="absolute font-heading font-bold text-xs text-white" id="displayTimer">01:30</span>
               </div>
             </div>
           </div>
@@ -166,73 +176,70 @@
           <div class="mt-4">
             <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider">1 PONTO • MARQUE APENAS UMA ALTERNATIVA</span>
             <h4 class="text-base sm:text-lg font-bold font-heading text-white tracking-wide mt-2 min-h-[48px]" id="displayQuestionTitle">
-              <!-- Título da pergunta injetado aqui -->
+              <!-- Enunciado -->
             </h4>
           </div>
 
           <!-- Alternativas -->
           <div class="space-y-2.5 mt-4" id="displayOptionsContainer">
-            <!-- Alternativas injetadas aqui -->
+            <!-- Alternativas dinâmicas -->
           </div>
         </div>
 
-        <!-- Botões Inferiores -->
+        <!-- Botões de Ação -->
         <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between">
           <span class="text-[11px] text-zinc-500">Selecione uma opção e avance</span>
-          <button onclick="submitAnswer()" id="btnNextQuestion" class="py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_12px_rgba(245,158,11,0.3)] transition-all">
+          <button onclick="submitAnswer()" id="btnNextQuestion" class="py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.3)] transition-all">
             PRÓXIMA QUESTÃO →
           </button>
         </div>
       </div>
 
-      <!-- Coluna Lateral: Cartão-Resposta e Candidato (4 colunas) -->
+      <!-- Lateral: Cartão-Resposta (4 colunas) -->
       <div class="lg:col-span-4 space-y-4">
-        <!-- Card Candidato -->
-        <div class="bg-[#0f1016]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl">
+        <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">CANDIDATO</span>
           <h4 class="text-sm font-bold font-heading text-white" id="displayCardCandidateName">! Felipe S</h4>
           <span class="text-[10px] text-zinc-500 font-heading">PROVA Nº <span id="displayCardCandidateId" class="text-zinc-300">00223</span></span>
         </div>
 
-        <!-- Cartão-Resposta -->
-        <div class="bg-[#0f1016]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl">
+        <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
           <div class="flex items-center justify-between mb-3 border-b border-zinc-800 pb-2">
             <span class="text-[10px] font-bold font-heading text-zinc-400 uppercase tracking-wider">CARTÃO-RESPOSTA</span>
-            <span class="text-[11px] font-heading font-bold text-amber-500" id="displayAnsweredCount">0/10</span>
+            <span class="text-[11px] font-heading font-bold text-red-500" id="displayAnsweredCount">0/10</span>
           </div>
 
           <div class="grid grid-cols-4 gap-2" id="gridAnswerCard">
             <!-- Grade gerada via JS -->
           </div>
 
-          <!-- Legenda -->
           <div class="flex items-center justify-between text-[10px] text-zinc-500 font-heading pt-4 mt-4 border-t border-zinc-800/80">
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Atual</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> Atual</span>
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-zinc-400"></span> Respondida</span>
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-zinc-800"></span> Em branco</span>
           </div>
 
-          <div class="bg-black/30 border border-amber-500/20 rounded-xl p-3 mt-4 text-[10px] text-zinc-400 leading-relaxed">
-            ⚠️ <span class="font-bold text-amber-500/90">Atenção:</span> Não é possível voltar para questões anteriores. Não atualize a página.
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-3 mt-4 text-[10px] text-zinc-400 leading-relaxed">
+            ⚠️ <span class="font-bold text-red-400">Atenção:</span> Não é possível voltar para questões anteriores. Não recarregue a página.
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- 3. TELA: BOLETIM DE RESULTADO (FINAL) -->
-    <div id="screen-result" class="w-full max-w-xl bg-[#0f1016]/95 border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
+    <!-- 3. BOLETIM DE RESULTADO (SEM BOTÃO DE REFAZER) -->
+    <div id="screen-result" class="w-full max-w-xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest block pt-2">BOLETIM DE RESULTADO • ESTAGIÁRIO</span>
       <h3 class="text-sm font-bold font-heading text-zinc-300 mt-1" id="resultCandidateName">! Felipe S</h3>
 
-      <!-- Indicador Circular de Aproveitamento -->
+      <!-- Círculo de Aproveitamento -->
       <div class="flex justify-center my-6">
         <div class="relative w-36 h-36 flex items-center justify-center">
           <svg class="w-36 h-36 -rotate-90">
             <circle cx="72" cy="72" r="58" stroke="#1f2937" stroke-width="8" fill="none" />
-            <circle id="resultProgressCircle" cx="72" cy="72" r="58" stroke="#f59e0b" stroke-width="8" fill="none" stroke-dasharray="364.4" stroke-dashoffset="182.2" class="transition-all duration-1000 ease-out" />
+            <circle id="resultProgressCircle" cx="72" cy="72" r="58" stroke="#ef233c" stroke-width="8" fill="none" stroke-dasharray="364.4" stroke-dashoffset="182.2" class="transition-all duration-1000 ease-out" />
           </svg>
           <div class="absolute flex flex-col items-center">
             <span class="text-3xl font-extrabold font-heading text-white" id="resultPercentText">50%</span>
@@ -249,7 +256,7 @@
         ENCAMINHADO: REPROVADO
       </div>
 
-      <!-- Resumo de Notas -->
+      <!-- Métricas Finais -->
       <div class="grid grid-cols-3 gap-2 text-center mb-6">
         <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontos</span>
@@ -259,9 +266,9 @@
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Acertos</span>
           <span class="text-base font-bold font-heading text-white" id="resultCorrectCount">5/10</span>
         </div>
-        <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl border-amber-500/30">
-          <span class="text-[9px] uppercase font-bold text-amber-500 font-heading block">Nota mínima</span>
-          <span class="text-base font-bold font-heading text-amber-400">7 pts</span>
+        <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl border-red-500/30">
+          <span class="text-[9px] uppercase font-bold text-red-500 font-heading block">Nota mínima</span>
+          <span class="text-base font-bold font-heading text-red-400">7 pts</span>
         </div>
       </div>
 
@@ -269,14 +276,17 @@
         Você não atingiu a nota mínima. Fale com um líder no Discord para os próximos passos.
       </p>
 
-      <button onclick="resetExam()" class="mt-6 py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-all">
-        FAZER NOVA TENTATIVA
-      </button>
+      <!-- Mensagem de Finalização Definitiva -->
+      <div class="mt-6 pt-5 border-t border-zinc-800/80">
+        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
+          🔒 PROVA FINALIZADA COM SUCESSO • PODE FECHAR ESTA ABA
+        </p>
+      </div>
     </div>
 
   </main>
 
-  <!-- MODAL: CONFIRMAR ENTREGA DA PROVA -->
+  <!-- MODAL: CONFIRMAR ENTREGA -->
   <div id="modalConfirmSubmit" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="w-full max-w-sm bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
       <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
@@ -288,7 +298,7 @@
         <button onclick="closeConfirmModal()" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all">
           Revisar questão
         </button>
-        <button onclick="finishExam()" class="py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_12px_rgba(245,158,11,0.3)] transition-all">
+        <button onclick="finishExam()" class="py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all">
           ENTREGAR
         </button>
       </div>
@@ -296,143 +306,142 @@
   </div>
 
   <!-- RODAPÉ -->
-  <footer class="border-t border-zinc-900 bg-[#090a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
+  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
     REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS
   </footer>
 
   <script>
-    // 10 QUESTÕES OFICIAIS EXTRAÍDAS DOS SEUS PRINTS
+    // 10 QUESTÕES OFICIAIS ALINHADAS AOS SEUS PRINTS
     const questions = [
       {
         id: 1,
-        title: "QUAL UNICO ITEM DE FULL TUNING DO HELICOPTERO ?",
+        title: "QUAL É O OBJETIVO PRINCIPAL DO ESTÁGIO NA MECÂNICA REDLINE?",
         options: [
-          { key: "A", text: "TRANSMISSÃO" },
-          { key: "B", text: "NENHUMA DAS ALTERNATIVAS" },
-          { key: "C", text: "FREIO" },
-          { key: "D", text: "TURBO" },
-          { key: "E", text: "MOTOR" }
+          { key: "A", text: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO." },
+          { key: "B", text: "PEGAR O CARGO DE LÍDER DIRETO." },
+          { key: "C", text: "SÓ PARA TER ACESSO AO DISCORD." },
+          { key: "D", text: "NÃO TEM OBJETIVO DEFINIDO." },
+          { key: "E", text: "SUBSTITUIR O DONO DA OFICINA." }
         ],
-        correct: "D"
+        correct: "A"
       },
       {
         id: 2,
-        title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
+        title: "QUAL A FREQUENCIA DA RADIO DA MECANICA ?",
         options: [
-          { key: "A", text: "1KK800" },
-          { key: "B", text: "600K" },
-          { key: "C", text: "1KK700" },
-          { key: "D", text: "1KK600" },
+          { key: "A", text: "18" },
+          { key: "B", text: "17" },
+          { key: "C", text: "22" },
+          { key: "D", text: "13" },
           { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
         ],
-        correct: "D"
+        correct: "B"
       },
       {
         id: 3,
-        title: "E PERMITIDO SAIR COM TOOGLE LIGADO PELA CIDADE A PASSEIO?",
+        title: "É PERMITIDO MENTIR NOS DADOS DO REGISTRO?",
         options: [
-          { key: "A", text: "NAO" },
-          { key: "B", text: "TALVEZ" },
-          { key: "C", text: "SÓ AS VEZES" },
-          { key: "D", text: "SIM" },
+          { key: "A", text: "SIM, SE NINGUÉM PERCEBER." },
+          { key: "B", text: "SÓ O TELEFONE PODE SER FALSO." },
+          { key: "C", text: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO." },
+          { key: "D", text: "DEPENDE DO HUMOR DO ADM." },
+          { key: "E", text: "SIM, É OBRIGATÓRIO." }
+        ],
+        correct: "C"
+      },
+      {
+        id: 4,
+        title: "QUAL VALOR DO FULL TUNING COM PARCERIA ?",
+        options: [
+          { key: "A", text: "550K" },
+          { key: "B", text: "600K" },
+          { key: "C", text: "900K" },
+          { key: "D", text: "1KK700" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS." }
+        ],
+        correct: "A"
+      },
+      {
+        id: 5,
+        title: "QUAL UNICO ITEM DE FULL TUNING DO HELICOPTERO ?",
+        options: [
+          { key: "A", text: "TURBO" },
+          { key: "B", text: "MOTOR" },
+          { key: "C", text: "TRANSMISSÃO" },
+          { key: "D", text: "FREIO" },
           { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
         ],
         correct: "A"
       },
       {
-        id: 4,
-        title: "QUAL UNICO CARGO QUE PODE MODIFICAR UNIFORME, E FICAR SEM DURANTE MECANICA MENOS EM ATEDIMENTO NO BLIP?",
+        id: 6,
+        title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
         options: [
-          { key: "A", text: "GERENTES" },
-          { key: "B", text: "ESTAGIARIOS" },
-          { key: "C", text: "MECANICOS" },
-          { key: "D", text: "LIDERES" },
-          { key: "E", text: "TODOS" }
-        ],
-        correct: "D"
-      },
-      {
-        id: 5,
-        title: "QUAL VALOR DO FULL TUNING COM PARCERIA ?",
-        options: [
-          { key: "A", text: "900K" },
+          { key: "A", text: "1KK600" },
           { key: "B", text: "1KK700" },
           { key: "C", text: "600K" },
-          { key: "D", text: "NENHUMA DAS ALTERNATIVAS." },
-          { key: "E", text: "550K" }
+          { key: "D", text: "1KK800" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
         ],
-        correct: "E"
-      },
-      {
-        id: 6,
-        title: "VOCE PODE USAR SEU PROPRIO CARRO PARA FARMAR?",
-        options: [
-          { key: "A", text: "NENHUMA DAS ALTERNATIVAS" },
-          { key: "B", text: "TALVEZ" },
-          { key: "C", text: "DEPENDE DO HUMOR DO PEXE" },
-          { key: "D", text: "SIM" },
-          { key: "E", text: "NAO" }
-        ],
-        correct: "E"
+        correct: "A"
       },
       {
         id: 7,
-        title: "QUAL É O OBJETIVO PRINCIPAL DO ESTÁGIO NA MECÂNICA REDLINE?",
+        title: "E PERMITIDO ANDAR COM O CARRO DA MECANICA COMO VEICULO PRÓPRIO OU PASSEIO?",
         options: [
-          { key: "A", text: "SÓ PARA TER ACESSO AO DISCORD." },
-          { key: "B", text: "SUBSTITUIR O DONO DA OFICINA." },
-          { key: "C", text: "NÃO TEM OBJETIVO DEFINIDO." },
-          { key: "D", text: "PEGAR O CARGO DE LÍDER DIRETO." },
-          { key: "E", text: "FAZER O FARM DE KITS, APRENDER AS REGRAS E O PROCEDIMENTO ANTES DE VIRAR MECÂNICO." }
+          { key: "A", text: "NAO" },
+          { key: "B", text: "SIM" },
+          { key: "C", text: "SÓ AS VEZES" },
+          { key: "D", text: "TALVEZ" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
         ],
-        correct: "E"
+        correct: "A"
       },
       {
         id: 8,
-        title: "E PERMITIDO ANDAR COM O CARRO DA MECANICA COMO VEICULO PRÓPRIO OU PASSEIO?",
+        title: "E PERMITIDO SAIR COM TOOGLE LIGADO PELA CIDADE A PASSEIO?",
         options: [
-          { key: "A", text: "NENHUMA DAS ALTERNATIVAS" },
+          { key: "A", text: "SIM" },
           { key: "B", text: "SÓ AS VEZES" },
-          { key: "C", text: "NAO" },
-          { key: "D", text: "TALVEZ" },
-          { key: "E", text: "SIM" }
-        ],
-        correct: "C"
-      },
-      {
-        id: 9,
-        title: "É PERMITIDO MENTIR NOS DADOS DO REGISTRO?",
-        options: [
-          { key: "A", text: "SÓ O TELEFONE PODE SER FALSO." },
-          { key: "B", text: "SIM, SE NINGUÉM PERCEBER." },
-          { key: "C", text: "DEPENDE DO HUMOR DO ADM." },
-          { key: "D", text: "NÃO. DADOS FALSOS PODEM GERAR RECUSA OU PUNIÇÃO." },
-          { key: "E", text: "SIM, É OBRIGATÓRIO." }
+          { key: "C", text: "TALVEZ" },
+          { key: "D", text: "NAO" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
         ],
         correct: "D"
       },
       {
-        id: 10,
-        title: "QUAL A FREQUENCIA DA RADIO DA MECANICA ?",
+        id: 9,
+        title: "QUAL UNICO CARGO QUE PODE MODIFICAR UNIFORME, E FICAR SEM DURANTE MECANICA MENOS EM ATEDIMENTO NO BLIP?",
         options: [
-          { key: "A", text: "NENHUMA DAS ALTERNATIVAS" },
-          { key: "B", text: "22" },
-          { key: "C", text: "13" },
-          { key: "D", text: "18" },
-          { key: "E", text: "17" }
+          { key: "A", text: "LIDERES" },
+          { key: "B", text: "ESTAGIARIOS" },
+          { key: "C", text: "MECANICOS" },
+          { key: "D", text: "GERENTES" },
+          { key: "E", text: "TODOS" }
         ],
-        correct: "C"
+        correct: "A"
+      },
+      {
+        id: 10,
+        title: "VOCE PODE USAR SEU PROPRIO CARRO PARA FARMAR?",
+        options: [
+          { key: "A", text: "SIM" },
+          { key: "B", text: "NAO" },
+          { key: "C", text: "DEPENDE DO HUMOR DO PEXE" },
+          { key: "D", text: "TALVEZ" },
+          { key: "E", text: "NENHUMA DAS ALTERNATIVAS" }
+        ],
+        correct: "A"
       }
     ];
 
-    // ESTADO DA PROVA
     let currentQuestionIdx = 0;
     let userAnswers = {};
     let candidateName = "";
     let candidateId = "";
-    let timeLeft = 100;
+    let timeLeft = 90;
     let timerInterval = null;
-    const TIME_PER_QUESTION = 100;
+    const TIME_PER_QUESTION = 90;
 
     function startExam() {
       const nameInput = document.getElementById("inputCandidateName").value.trim();
@@ -466,30 +475,25 @@
       currentQuestionIdx = index;
       const q = questions[index];
 
-      // Atualiza cabeçalhos
       document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / 10`;
       document.getElementById("displayQuestionTitle").textContent = q.title;
 
-      // Botão finalizar ou próxima
       const nextBtn = document.getElementById("btnNextQuestion");
       if (index === questions.length - 1) {
         nextBtn.textContent = "ENTREGAR PROVA";
-        nextBtn.className = "py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_12px_rgba(245,158,11,0.3)] transition-all";
       } else {
         nextBtn.textContent = "PRÓXIMA QUESTÃO →";
-        nextBtn.className = "py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black shadow-[0_0_12px_rgba(245,158,11,0.3)] transition-all";
       }
 
-      // Renderiza alternativas
       const container = document.getElementById("displayOptionsContainer");
       container.innerHTML = q.options.map(opt => {
         const isSelected = userAnswers[q.id] === opt.key;
         return `
           <div 
             onclick="selectOption('${opt.key}')" 
-            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-amber-500 bg-amber-500/10 shadow-[0_0_12px_rgba(245,158,11,0.2)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
+            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
           >
-            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-amber-500 border-amber-500 text-black' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
               ${opt.key}
             </div>
             <span class="text-xs font-semibold ${isSelected ? 'text-white' : 'text-zinc-300'}">${opt.text}</span>
@@ -535,7 +539,6 @@
       document.getElementById("screen-exam").classList.add("hidden");
       document.getElementById("screen-result").classList.remove("hidden");
 
-      // Cálculo da nota
       let score = 0;
       questions.forEach(q => {
         if (userAnswers[q.id] === q.correct) {
@@ -551,7 +554,6 @@
       document.getElementById("resultFinalScore").textContent = `${score}/10`;
       document.getElementById("resultCorrectCount").textContent = `${score}/10`;
 
-      // Círculo de progresso SVG (364.4 = perímetro total)
       const offset = 364.4 - (364.4 * percent) / 100;
       const circle = document.getElementById("resultProgressCircle");
       circle.style.strokeDashoffset = offset;
@@ -561,18 +563,18 @@
       const feedback = document.getElementById("resultFeedbackText");
 
       if (isApproved) {
-        circle.setAttribute("stroke", "#10b981");
+        circle.setAttribute("stroke", "#84cc16");
         heading.textContent = "APROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-emerald-400";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
         badge.textContent = "ENCAMINHADO: APROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
         feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
       } else {
-        circle.setAttribute("stroke", "#f59e0b");
+        circle.setAttribute("stroke", "#ef233c");
         heading.textContent = "REPROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-amber-500";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
         badge.textContent = "ENCAMINHADO: REPROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-amber-500/10 text-amber-400 border-amber-500/30";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
         feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
       }
     }
@@ -588,7 +590,7 @@
 
         let borderClass = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
         if (isCurrent) {
-          borderClass = "border-amber-500 bg-amber-500/10 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.3)]";
+          borderClass = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
         } else if (answer) {
           borderClass = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
         }
@@ -625,15 +627,8 @@
       document.getElementById("displayTimer").textContent = 
         `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-      // Animação do círculo (125.6 = perímetro total de raio 20)
       const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
       document.getElementById("timerCircle").style.strokeDashoffset = offset;
-    }
-
-    function resetExam() {
-      document.getElementById("screen-result").classList.add("hidden");
-      document.getElementById("screen-instructions").classList.remove("hidden");
-      document.getElementById("checkAgree").checked = false;
     }
   </script>
 </body>
