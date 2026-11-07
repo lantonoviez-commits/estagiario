@@ -30,7 +30,7 @@
 </head>
 <body class="min-h-screen bg-[#08080c] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- CABEÇALHO SUPERIOR COM EMBLEMA OFICIAL REDLINE -->
+  <!-- CABEÇALHO -->
   <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3.5">
@@ -70,39 +70,6 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 0. TELA DE BLOQUEIO ANTIFRAUDE -->
-    <div id="screen-blocked" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
-      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
-
-      <div class="w-16 h-16 rounded-full bg-red-600/10 border border-red-500/30 flex items-center justify-center mx-auto mt-2 text-2xl text-red-500">
-        🔒
-      </div>
-
-      <h2 class="text-2xl font-extrabold font-heading text-white tracking-wider mt-4">
-        ACESSO BLOQUEADO
-      </h2>
-      <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-4 bg-red-950/60 text-red-400 border-red-800/50">
-        TENTATIVA JÁ REGISTRADA
-      </div>
-
-      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">
-        Esta prova é de acesso único. Nosso sistema identificou que você já concluiu ou tentou atualizar a página.
-      </p>
-
-      <div class="mt-6 p-4 rounded-xl bg-black/40 border border-zinc-800 text-left text-xs space-y-1.5" id="blockedDetails">
-        <!-- Detalhes do bloqueio -->
-      </div>
-
-      <div class="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between">
-        <p class="text-[10px] text-zinc-500 font-heading tracking-wider uppercase">
-          FALE COM A LIDERANÇA NO DISCORD.
-        </p>
-        <button onclick="masterBypassPrompt()" class="text-[10px] font-heading font-bold text-red-500 hover:text-red-400 underline uppercase">
-          Acesso Master
-        </button>
-      </div>
-    </div>
-
     <!-- 1. FOLHA DE ROSTO -->
     <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
@@ -116,15 +83,15 @@
         PROVA DE ESTAGIÁRIO <span class="text-red-500">REDLINE</span>
       </h2>
 
-      <!-- Dados do Candidato -->
+      <!-- Campos do Candidato -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5 bg-zinc-900/40 border border-zinc-800/80 p-4 rounded-xl">
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">NOME DO CANDIDATO <span class="text-red-500">*</span></label>
-          <input type="text" id="inputCandidateName" oninput="checkInputs()" placeholder="Ex: Felipe S (ou redline999)" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1 transition-all">
+          <input type="text" id="inputCandidateName" placeholder="Digite seu nome" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID <span class="text-red-500">*</span></label>
-          <input type="text" id="inputCandidateId" oninput="checkInputs()" placeholder="Ex: 00223 (ou 999)" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1 transition-all">
+          <input type="text" id="inputCandidateId" placeholder="Digite seu ID" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
       </div>
 
@@ -161,18 +128,18 @@
         </div>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
-          <p class="text-red-400 font-semibold">⚠️ Não recarregue a página (F5) durante o teste, pois seu envio será bloqueado.</p>
+          <p class="text-red-400 font-semibold">⚠️ Não recarregue a página durante a realização da prova.</p>
         </div>
       </div>
 
-      <!-- Aceite e Início -->
+      <!-- Confirmação e Início -->
       <div class="pt-2 border-t border-zinc-800 space-y-4">
         <label class="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-300 select-none">
-          <input type="checkbox" id="checkAgree" onchange="checkInputs()" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-600 focus:ring-0 cursor-pointer">
+          <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-600 focus:ring-0 cursor-pointer">
           <span>Li as instruções e estou pronto para começar. <span class="text-red-500">*</span></span>
         </label>
         
-        <button onclick="handleStartClick()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
+        <button onclick="iniciarProvaDireto()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
           COMEÇAR PROVA
         </button>
       </div>
@@ -180,13 +147,10 @@
 
     <!-- 2. EXECUÇÃO DA QUESTÃO -->
     <div id="screen-exam" class="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 hidden">
-
-      <!-- Coluna Principal (8 colunas) -->
       <div class="lg:col-span-8 bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
         <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
 
         <div>
-          <!-- Topo da Questão -->
           <div class="flex items-center justify-between pt-1 border-b border-zinc-800 pb-3">
             <div>
               <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider block">PROVA DE ESTAGIÁRIO REDLINE</span>
@@ -195,7 +159,6 @@
               </h3>
             </div>
 
-            <!-- Contador Circular (90s) -->
             <div class="flex items-center gap-2">
               <div class="relative w-12 h-12 flex items-center justify-center">
                 <svg class="w-12 h-12 -rotate-90">
@@ -209,18 +172,12 @@
 
           <div class="mt-4">
             <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider">1 PONTO • MARQUE APENAS UMA ALTERNATIVA</span>
-            <h4 class="text-base sm:text-lg font-bold font-heading text-white tracking-wide mt-2 min-h-[48px]" id="displayQuestionTitle">
-              <!-- Enunciado -->
-            </h4>
+            <h4 class="text-base sm:text-lg font-bold font-heading text-white tracking-wide mt-2 min-h-[48px]" id="displayQuestionTitle"></h4>
           </div>
 
-          <!-- Alternativas -->
-          <div class="space-y-2.5 mt-4" id="displayOptionsContainer">
-            <!-- Alternativas dinâmicas -->
-          </div>
+          <div class="space-y-2.5 mt-4" id="displayOptionsContainer"></div>
         </div>
 
-        <!-- Botões de Ação -->
         <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between">
           <span class="text-[11px] text-zinc-500">Selecione uma opção e avance</span>
           <button onclick="submitAnswer()" id="btnNextQuestion" class="py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.3)] transition-all">
@@ -229,7 +186,7 @@
         </div>
       </div>
 
-      <!-- Lateral: Cartão-Resposta (4 colunas) -->
+      <!-- Lateral -->
       <div class="lg:col-span-4 space-y-4">
         <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">CANDIDATO</span>
@@ -243,9 +200,7 @@
             <span class="text-[11px] font-heading font-bold text-red-500" id="displayAnsweredCount">0/10</span>
           </div>
 
-          <div class="grid grid-cols-4 gap-2" id="gridAnswerCard">
-            <!-- Grade gerada via JS -->
-          </div>
+          <div class="grid grid-cols-4 gap-2" id="gridAnswerCard"></div>
 
           <div class="flex items-center justify-between text-[10px] text-zinc-500 font-heading pt-4 mt-4 border-t border-zinc-800/80">
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> Atual</span>
@@ -258,17 +213,15 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- 3. BOLETIM DE RESULTADO (FINAL) -->
+    <!-- 3. BOLETIM DE RESULTADO -->
     <div id="screen-result" class="w-full max-w-xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center hidden">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest block pt-2">BOLETIM DE RESULTADO • ESTAGIÁRIO</span>
       <h3 class="text-sm font-bold font-heading text-zinc-300 mt-1" id="resultCandidateName">---</h3>
 
-      <!-- Círculo de Aproveitamento -->
       <div class="flex justify-center my-6">
         <div class="relative w-36 h-36 flex items-center justify-center">
           <svg class="w-36 h-36 -rotate-90">
@@ -282,15 +235,11 @@
         </div>
       </div>
 
-      <!-- Status Final -->
-      <h2 class="text-3xl font-extrabold font-heading tracking-wider" id="resultStatusHeading">
-        REPROVADO
-      </h2>
+      <h2 class="text-3xl font-extrabold font-heading tracking-wider" id="resultStatusHeading">REPROVADO</h2>
       <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6" id="resultStatusBadge">
         ENCAMINHADO: REPROVADO
       </div>
 
-      <!-- Métricas Finais -->
       <div class="grid grid-cols-3 gap-2 text-center mb-6">
         <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
           <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontos</span>
@@ -306,14 +255,12 @@
         </div>
       </div>
 
-      <p class="text-xs text-zinc-400" id="resultFeedbackText">
-        Você não atingiu a nota mínima. Fale com um líder no Discord para os próximos passos.
-      </p>
+      <p class="text-xs text-zinc-400" id="resultFeedbackText"></p>
 
       <div class="mt-6 pt-5 border-t border-zinc-800/80">
-        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
-          🔒 PROVA FINALIZADA COM SUCESSO
-        </p>
+        <button onclick="recarregarPaginaLimpa()" class="py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-all">
+          FAZER NOVA TENTATIVA
+        </button>
       </div>
     </div>
 
@@ -325,7 +272,7 @@
       <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
       <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA?</h3>
       <p class="text-xs text-zinc-400 mt-2">
-        Depois de entregar não será possível alterar nenhuma resposta. O tempo continua correndo.
+        Depois de entregar não será possível alterar nenhuma resposta.
       </p>
       <div class="grid grid-cols-2 gap-3 mt-6">
         <button onclick="closeConfirmModal()" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all">
@@ -338,7 +285,6 @@
     </div>
   </div>
 
-  <!-- RODAPÉ -->
   <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
     REDLINE MECÂNICA • PROVA DE ESTAGIÁRIO • TODOS OS DIREITOS RESERVADOS
   </footer>
@@ -475,106 +421,26 @@
     let timerInterval = null;
     const TIME_PER_QUESTION = 90;
 
-    // REGRA MASTER: redline999 + 999
-    function isMaster(name, id) {
-      return (name.toLowerCase() === "redline999" && String(id).trim() === "999");
-    }
-
-    function checkInputs() {
+    function iniciarProvaDireto() {
       const name = document.getElementById("inputCandidateName").value.trim();
       const id = document.getElementById("inputCandidateId").value.trim();
       const agree = document.getElementById("checkAgree").checked;
-      const btn = document.getElementById("btnStartExam");
-
-      // Se for o acesso master redline999 + 999, o botão fica verde neon especial
-      if (isMaster(name, id)) {
-        btn.className = "w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all cursor-pointer";
-        btn.textContent = "INICIAR PROVA (ACESSO MASTER ATIVO)";
-        return;
-      }
-
-      if (name.length > 0 && id.length > 0 && agree) {
-        btn.className = "w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer";
-        btn.textContent = "COMEÇAR PROVA";
-      } else {
-        btn.className = "w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-zinc-800 text-zinc-400 hover:bg-zinc-700 transition-all cursor-pointer";
-        btn.textContent = "PREENCHA NOME, ID E CONFIRME AS REGRAS";
-      }
-    }
-
-    function handleStartClick() {
-      const name = document.getElementById("inputCandidateName").value.trim();
-      const id = document.getElementById("inputCandidateId").value.trim();
-      const agree = document.getElementById("checkAgree").checked;
-
-      // Atalho Master: redline999 + 999 pula qualquer validação e inicia sempre
-      if (isMaster(name, id)) {
-        localStorage.removeItem("redline_done");
-        startExam(name, id, true);
-        return;
-      }
 
       if (!name) {
-        alert("Atenção: Por favor, preencha o Nome do Candidato.");
+        alert("Por favor, digite o Nome do Candidato.");
         document.getElementById("inputCandidateName").focus();
         return;
       }
       if (!id) {
-        alert("Atenção: Por favor, preencha o Passaporte / ID.");
+        alert("Por favor, digite o Passaporte / ID.");
         document.getElementById("inputCandidateId").focus();
         return;
       }
       if (!agree) {
-        alert("Atenção: Marque a caixa confirmando que leu as instruções de segurança.");
+        alert("Marque o quadrado confirmando que leu as instruções.");
         return;
       }
 
-      startExam(name, id, false);
-    }
-
-    // Se estiver na tela de bloqueio, permite destravar digitando o acesso master
-    function masterBypassPrompt() {
-      const key = prompt("Digite a Chave Master de Desbloqueio (Ex: redline999):");
-      if (key && key.trim().toLowerCase() === "redline999") {
-        localStorage.clear();
-        alert("Bloqueio removido com sucesso!");
-        location.reload();
-      }
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      // Bloqueia apenas se NÃO for o Master
-      const lock = localStorage.getItem("redline_done");
-      if (lock) {
-        try {
-          const parsed = JSON.parse(lock);
-          if (!isMaster(parsed.name || "", parsed.id || "")) {
-            showBlockedScreen(parsed);
-            return;
-          }
-        } catch (e) {}
-      }
-      checkInputs();
-    });
-
-    function showBlockedScreen(data) {
-      document.getElementById("screen-instructions").classList.add("hidden");
-      document.getElementById("screen-exam").classList.add("hidden");
-      document.getElementById("screen-result").classList.add("hidden");
-
-      const blockedScreen = document.getElementById("screen-blocked");
-      blockedScreen.classList.remove("hidden");
-
-      const detailsBox = document.getElementById("blockedDetails");
-      detailsBox.innerHTML = `
-        <div><strong class="text-zinc-400">Candidato:</strong> <span class="text-white">${data.name || '---'}</span></div>
-        <div><strong class="text-zinc-400">Passaporte/ID:</strong> <span class="text-white">${data.id || '---'}</span></div>
-        <div><strong class="text-zinc-400">Nota Registrada:</strong> <span class="${data.score >= 7 ? 'text-lime-400 font-bold' : 'text-red-400 font-bold'}">${data.score}/10 (${data.score >= 7 ? 'APROVADO' : 'REPROVADO'})</span></div>
-        <div><strong class="text-zinc-400">Data de Envio:</strong> <span class="text-zinc-300">${data.date || '---'}</span></div>
-      `;
-    }
-
-    function startExam(name, id, isMasterMode) {
       candidateName = name;
       candidateId = id;
 
@@ -667,17 +533,6 @@
       const percent = (score / 10) * 100;
       const isApproved = score >= 7;
 
-      // Se NÃO for Master, grava a trava no disco
-      if (!isMaster(candidateName, candidateId)) {
-        localStorage.setItem("redline_done", JSON.stringify({
-          name: candidateName,
-          id: candidateId,
-          score: score,
-          percent: percent,
-          date: new Date().toLocaleString("pt-BR")
-        }));
-      }
-
       document.getElementById("resultCandidateName").textContent = candidateName;
       document.getElementById("resultPercentText").textContent = `${percent}%`;
       document.getElementById("resultFinalScore").textContent = `${score}/10`;
@@ -710,4 +565,59 @@
 
     function renderAnswerCard() {
       const grid = document.getElementById("gridAnswerCard");
-      let answeredCount
+      let answeredCount = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const isCurrent = idx === currentQuestionIdx;
+        const answer = userAnswers[q.id];
+        if (answer) answeredCount++;
+
+        let borderClass = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
+        if (isCurrent) {
+          borderClass = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
+        } else if (answer) {
+          borderClass = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
+        }
+
+        return `
+          <div class="border rounded-lg p-1.5 text-center transition-all ${borderClass}">
+            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${answer || (isCurrent ? '•' : '')}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("displayAnsweredCount").textContent = `${answeredCount}/10`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = TIME_PER_QUESTION;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          advanceQuestion();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("displayTimer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
+      document.getElementById("timerCircle").style.strokeDashoffset = offset;
+    }
+
+    function recarregarPaginaLimpa() {
+      location.reload();
+    }
+  </script>
+</body>
+</html>
