@@ -70,32 +70,17 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 1. TELA: PAINEL DA LIDERANÇA (ABRE SE NÃO TIVER TOKEN NA URL) -->
+    <!-- 1. TELA: PAINEL DA LIDERANÇA (GERADOR DIRETO SEM TRAVA) -->
     <div id="screen-leader" class="w-full max-w-md bg-[#0f1016] border border-red-900/80 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden" style="display: block;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
-      <h3 class="text-xl font-extrabold font-heading text-white tracking-wider mt-1">PAINEL DA LIDERANÇA</h3>
-      <p class="text-xs text-zinc-400 mt-1">Autentique-se com sua senha para gerar links únicos aos candidatos.</p>
-
-      <div id="box-leader-auth" class="space-y-3 mt-5">
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DA LIDERANÇA</label>
-          <input type="password" id="inputLeaderPass" placeholder="Digite a senha de líder" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
-        </div>
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">ID MESTRE</label>
-          <input type="password" id="inputLeaderId" placeholder="Digite o ID mestre" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
-        </div>
-        <button type="button" onclick="authLeader()" class="w-full py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white transition-all shadow-[0_0_12px_rgba(239,35,60,0.4)] cursor-pointer">
-          ENTRAR NO GERADOR
-        </button>
+      <div class="flex items-center justify-between mt-1">
+        <h3 class="text-xl font-extrabold font-heading text-white tracking-wider">PAINEL DA LIDERANÇA</h3>
+        <span class="px-2 py-0.5 rounded text-[10px] font-heading font-bold bg-red-950/80 text-red-400 border border-red-800/60">GERADOR ATIVO</span>
       </div>
+      <p class="text-xs text-zinc-400 mt-1">Gere links protegidos de acesso único para enviar aos candidatos.</p>
 
-      <div id="box-leader-generator" class="space-y-4 mt-5" style="display: none;">
-        <div class="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-[11px] text-emerald-400">
-          ✓ <strong>Liderança Autenticada com Sucesso</strong>
-        </div>
-
+      <div class="space-y-4 mt-5">
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">PASSAPORTE / ID DO CANDIDATO <span class="text-red-500">*</span></label>
           <input type="text" id="genId" placeholder="Ex: 223" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
@@ -106,12 +91,17 @@
           <input type="text" id="genName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
 
-        <button type="button" onclick="generateLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DE SEGURANÇA DO LÍDER</label>
+          <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline2026)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        </div>
+
+        <button type="button" onclick="generateLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
           GERAR E COPIAR LINK DA PROVA
         </button>
 
-        <div id="box-link-output" class="p-3 bg-black/60 border border-zinc-800 rounded-xl" style="display: none;">
-          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Link Gerado (copiado para área de transferência):</span>
+        <div id="box-link-output" class="p-3 bg-black/60 border border-zinc-800 rounded-xl mt-3" style="display: none;">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Link Gerado (copiado automaticamente):</span>
           <input type="text" id="outputLink" readonly class="w-full bg-transparent text-[10px] text-emerald-400 font-mono mt-1 focus:outline-none select-all">
         </div>
       </div>
@@ -373,7 +363,6 @@
     // ==========================================
     const DISCORD_WEBHOOK_URL = "SUA_URL_DO_WEBHOOK_AQUI"; // Cole aqui o webhook do Discord
     const MASTER_SECRET = "redline2026";
-    const MASTER_ID = "2026";
 
     // 10 QUESTÕES OFICIAIS COM RESPOSTA CORRETA EM TEXTO
     const baseQuestions = [
@@ -558,20 +547,18 @@
       return Math.abs(hash).toString(16).toUpperCase();
     }
 
-    // INICIALIZAÇÃO E CONTROLE DE F5 / TRAVA DE TOKEN
+    // INICIALIZAÇÃO E VERIFICAÇÃO DE URL
     window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const paramId = params.get("id");
       const paramChave = params.get("chave") || params.get("token");
       const paramNome = params.get("nome");
 
-      // Se há parâmetros na URL
       if (paramId && paramChave) {
         const expected = createToken(paramId);
         const cleanToken = paramChave.toUpperCase().trim();
 
         if (cleanToken === expected) {
-          // VERIFICA SE O TOKEN JÁ FOI CONSUMIDO / RECARREGADO COM F5
           if (localStorage.getItem(`redline_consumed_${cleanToken}`)) {
             switchView('screen-consumed');
             return;
@@ -588,29 +575,25 @@
         }
       }
 
-      // Se não tem parâmetros válidos, cai sempre no painel do líder
+      // Se entrou sem chave válida, cai sempre no painel do líder
       switchView('screen-leader');
     });
 
-    // LÍDER
-    function authLeader() {
-      const pass = document.getElementById("inputLeaderPass").value.trim();
-      const id = document.getElementById("inputLeaderId").value.trim();
-
-      if (pass === MASTER_SECRET && id === MASTER_ID) {
-        document.getElementById("box-leader-auth").style.display = "none";
-        document.getElementById("box-leader-generator").style.display = "block";
-      } else {
-        alert("Senha da liderança ou ID incorretos!");
-      }
-    }
-
+    // GERADOR DIRETO DO LÍDER (SEM PRECISAR DE SUB-TELAS)
     function generateLink() {
       const id = document.getElementById("genId").value.trim();
       const name = document.getElementById("genName").value.trim();
+      const pass = document.getElementById("inputLeaderPass").value.trim();
 
       if (!id) {
         alert("Preencha o Passaporte / ID do candidato.");
+        document.getElementById("genId").focus();
+        return;
+      }
+
+      if (pass !== MASTER_SECRET) {
+        alert("Senha da liderança incorreta! Digite: redline2026");
+        document.getElementById("inputLeaderPass").focus();
         return;
       }
 
@@ -633,7 +616,7 @@
       });
     }
 
-    // PROVA
+    // EXECUÇÃO DA PROVA
     function startExam() {
       const name = document.getElementById("candidateNameInput").value.trim();
       const id = document.getElementById("candidateIdInput").value.trim();
@@ -652,7 +635,6 @@
         return;
       }
 
-      // TRAVA DE F5 ATIVADA: consome o token no início da prova
       if (currentToken) {
         localStorage.setItem(`redline_consumed_${currentToken}`, "true");
       }
@@ -784,3 +766,85 @@
               { name: "🆔 Passaporte / ID", value: `\`${candidateId}\``, inline: true },
               { name: "📊 Aproveitamento", value: `**${score}/10** (${percent}%)`, inline: true },
               { name: "🎯 Nota Mínima", value: "7 / 10 pontos", inline: true },
+              { name: "🔑 Chave Utilizada", value: `\`${currentToken || "ACESSO_DIRETO"}\``, inline: true },
+              { name: "📅 Concluído em", value: new Date().toLocaleString("pt-BR"), inline: true }
+            ],
+            footer: { text: "RedLine Mecânica • Auditoria Interna" },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          msg.textContent = "✓ Relatório registrado com sucesso no Discord da liderança!";
+          msg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
+        } else {
+          msg.textContent = "⚠️ Falha ao enviar para o Discord (verifique o Webhook).";
+        }
+      })
+      .catch(() => {
+        msg.textContent = "⚠️ Erro de rede ao comunicar com o Discord.";
+      });
+    }
+
+    function renderAnswerCard() {
+      const grid = document.getElementById("gridAnswerCard");
+      let count = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const isCurrent = idx === currentQuestionIdx;
+        const ans = userAnswers[q.id];
+        if (ans) count++;
+
+        let border = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
+        if (isCurrent) {
+          border = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
+        } else if (ans) {
+          border = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
+        }
+
+        return `
+          <div class="border rounded-lg p-1.5 text-center transition-all ${border}">
+            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${ans ? ans.key : (isCurrent ? '•' : '')}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("displayAnsweredCount").textContent = `${count}/10`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = TIME_PER_QUESTION;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          nextOrFinish();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("displayTimer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
+      const circle = document.getElementById("timerCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+    }
+  </script>
+</body>
+</html>
