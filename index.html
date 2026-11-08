@@ -63,7 +63,7 @@
 
   <!-- NAVEGAÇÃO -->
   <div class="max-w-5xl mx-auto w-full px-4 pt-4 flex items-center justify-between text-xs font-heading tracking-wider">
-    <span class="text-red-500 font-bold tracking-widest" id="navSubtitle">— PAINEL DA LIDERANÇA</span>
+    <span class="text-red-500 font-bold tracking-widest" id="navSubtitle">— PAINEL DA LIDERANÇA • ESTAGIÁRIO</span>
     <span class="text-zinc-500">Mecânica RedLine - Fluxo</span>
   </div>
 
@@ -75,7 +75,10 @@
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <div class="flex items-center justify-between mt-1">
-        <h3 class="text-xl font-extrabold font-heading text-white tracking-wider">PAINEL DA LIDERANÇA</h3>
+        <div>
+          <span class="text-[10px] font-extrabold font-heading text-red-500 tracking-widest uppercase block">PROVA ESTAGIÁRIO</span>
+          <h3 class="text-xl font-extrabold font-heading text-white tracking-wider">PAINEL DA LIDERANÇA</h3>
+        </div>
         <span class="px-2 py-0.5 rounded text-[10px] font-heading font-bold bg-red-950/80 text-red-400 border border-red-800/60">GERADOR ATIVO</span>
       </div>
       <p class="text-xs text-zinc-400 mt-1">Gere links protegidos de acesso único para enviar aos candidatos.</p>
@@ -91,9 +94,21 @@
           <input type="text" id="genName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
         </div>
 
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DE SEGURANÇA DO LÍDER</label>
-          <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline2026)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">TENTATIVA DO CANDIDATO</label>
+            <select id="genAttempt" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1 cursor-pointer">
+              <option value="1">1ª Tentativa</option>
+              <option value="2">2ª Tentativa (Refazer)</option>
+              <option value="3">3ª Tentativa (Refazer)</option>
+              <option value="4">4ª Tentativa (Refazer)</option>
+              <option value="5">5ª Tentativa (Refazer)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DO LÍDER</label>
+            <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+          </div>
         </div>
 
         <button type="button" onclick="generateLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
@@ -101,7 +116,10 @@
         </button>
 
         <div id="box-link-output" class="p-3 bg-black/60 border border-zinc-800 rounded-xl mt-3" style="display: none;">
-          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Link Gerado (copiado automaticamente):</span>
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Link Gerado (Copiado Automaticamente):</span>
+            <span id="labelAttemptGenerated" class="text-[9px] font-bold text-red-400 font-heading uppercase"></span>
+          </div>
           <input type="text" id="outputLink" readonly class="w-full bg-transparent text-[10px] text-emerald-400 font-mono mt-1 focus:outline-none select-all">
         </div>
       </div>
@@ -123,12 +141,12 @@
       </div>
 
       <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">
-        Este link de prova era de acesso único e foi consumido ou invalidado por atualização de página (F5). Não é permitido refazer a avaliação pelo mesmo link.
+        Este link de prova era de acesso único e foi consumido ou invalidado por atualização de página (F5). Para refazer o teste, solicite uma nova tentativa com a liderança no Discord.
       </p>
 
       <div class="mt-6 pt-5 border-t border-zinc-800/80">
         <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
-          FALE COM A LIDERANÇA NO DISCORD PARA MAIS INFORMAÇÕES.
+          FALE COM A LIDERANÇA NO DISCORD PARA LIBERAR UMA NOVA TENTATIVA.
         </p>
       </div>
     </div>
@@ -139,7 +157,7 @@
 
       <div class="flex items-center justify-between pt-2">
         <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • PROVA OFICIAL</span>
-        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50">LINK VÁLIDO</span>
+        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50" id="badgeAttemptHeader">LINK VÁLIDO</span>
       </div>
 
       <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-wide mt-2">
@@ -362,7 +380,7 @@
     // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
     // ==========================================
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568780161493762078/jlFWx2USHM31Qf50h5_6bD-bkH8uwNbQFhYTbTi4R_WoZ0A3qJg2OiEfngZ-OL6rhYew";
-    const MASTER_SECRET = "redline2026";
+    const MASTER_SECRET = "redline"; // SENHA ATUALIZADA
 
     // 10 QUESTÕES OFICIAIS COM RESPOSTA CORRETA EM TEXTO
     const baseQuestions = [
@@ -493,6 +511,7 @@
     let userAnswers = {};
     let candidateName = "";
     let candidateId = "";
+    let currentAttempt = "1";
     let currentToken = "";
     let timeLeft = 90;
     let timerInterval = null;
@@ -508,9 +527,9 @@
       });
       const navSubtitle = document.getElementById('navSubtitle');
       if (navSubtitle) {
-        if (targetScreenId === 'screen-leader') navSubtitle.textContent = '— PAINEL DA LIDERANÇA';
+        if (targetScreenId === 'screen-leader') navSubtitle.textContent = '— PAINEL DA LIDERANÇA • ESTAGIÁRIO';
         else if (targetScreenId === 'screen-consumed') navSubtitle.textContent = '— ACESSO BLOQUEADO';
-        else navSubtitle.textContent = '— PROVA • ESTAGIÁRIO';
+        else navSubtitle.textContent = '— PROVA ESTAGIÁRIO • REDLINE';
       }
     }
 
@@ -536,10 +555,11 @@
       });
     }
 
-    function createToken(id) {
+    // Geração com suporte a até 5 tentativas independentes por ID
+    function createToken(id, attempt = "1") {
       const clean = String(id).trim().toLowerCase();
       let hash = 0;
-      const str = `${MASTER_SECRET}_RL_${clean}`;
+      const str = `${MASTER_SECRET}_RL_ESTAGIARIO_T${attempt}_${clean}`;
       for (let i = 0; i < str.length; i++) {
         hash = ((hash << 5) - hash) + str.charCodeAt(i);
         hash |= 0;
@@ -553,9 +573,10 @@
       const paramId = params.get("id");
       const paramChave = params.get("chave") || params.get("token");
       const paramNome = params.get("nome");
+      const paramAttempt = params.get("tentativa") || "1";
 
       if (paramId && paramChave) {
-        const expected = createToken(paramId);
+        const expected = createToken(paramId, paramAttempt);
         const cleanToken = paramChave.toUpperCase().trim();
 
         if (cleanToken === expected) {
@@ -565,8 +586,13 @@
           }
 
           currentToken = cleanToken;
+          currentAttempt = paramAttempt;
           document.getElementById("candidateIdInput").value = paramId;
           document.getElementById("candidateIdInput").readOnly = true;
+          
+          const badge = document.getElementById("badgeAttemptHeader");
+          if (badge) badge.textContent = `TENTATIVA ${paramAttempt} • LINK VÁLIDO`;
+
           if (paramNome) {
             document.getElementById("candidateNameInput").value = paramNome;
           }
@@ -579,11 +605,12 @@
       switchView('screen-leader');
     });
 
-    // GERADOR DIRETO DO LÍDER
+    // GERADOR DIRETO DO LÍDER COM SUPORTE A ATÉ 5 TENTATIVAS
     function generateLink() {
       const id = document.getElementById("genId").value.trim();
       const name = document.getElementById("genName").value.trim();
       const pass = document.getElementById("inputLeaderPass").value.trim();
+      const attempt = document.getElementById("genAttempt").value;
 
       if (!id) {
         alert("Preencha o Passaporte / ID do candidato.");
@@ -592,15 +619,16 @@
       }
 
       if (pass !== MASTER_SECRET) {
-        alert("Senha da liderança incorreta! Digite: redline2026");
+        alert("Senha da liderança incorreta! Digite: redline");
         document.getElementById("inputLeaderPass").focus();
         return;
       }
 
-      const token = createToken(id);
+      const token = createToken(id, attempt);
       const url = new URL(window.location.href);
       url.search = "";
       url.searchParams.set("id", id);
+      url.searchParams.set("tentativa", attempt);
       url.searchParams.set("chave", token);
       if (name) url.searchParams.set("nome", name);
 
@@ -608,10 +636,12 @@
 
       navigator.clipboard.writeText(finalLink).then(() => {
         document.getElementById("outputLink").value = finalLink;
+        document.getElementById("labelAttemptGenerated").textContent = `${attempt}ª Tentativa`;
         document.getElementById("box-link-output").style.display = "block";
-        alert(`Link gerado e COPIADO com sucesso para o ID ${id}! Pode colar no Discord do candidato.`);
+        alert(`Link da ${attempt}ª Tentativa gerado e COPIADO para o ID ${id}! Pode enviar no Discord do candidato.`);
       }).catch(() => {
         document.getElementById("outputLink").value = finalLink;
+        document.getElementById("labelAttemptGenerated").textContent = `${attempt}ª Tentativa`;
         document.getElementById("box-link-output").style.display = "block";
       });
     }
@@ -704,147 +734,4 @@
 
       let score = 0;
       questions.forEach(q => {
-        if (userAnswers[q.id] && userAnswers[q.id].text === q.correctText) {
-          score++;
-        }
-      });
-
-      const percent = (score / 10) * 100;
-      const isApproved = score >= 7;
-
-      document.getElementById("resultCandidateName").textContent = candidateName;
-      document.getElementById("resultPercentText").textContent = `${percent}%`;
-      document.getElementById("resultFinalScore").textContent = `${score}/10`;
-      document.getElementById("resultCorrectCount").textContent = `${score}/10`;
-
-      const offset = 364.4 - (364.4 * percent) / 100;
-      const circle = document.getElementById("resultProgressCircle");
-      if (circle) circle.style.strokeDashoffset = offset;
-
-      const heading = document.getElementById("resultStatusHeading");
-      const badge = document.getElementById("resultStatusBadge");
-      const feedback = document.getElementById("resultFeedbackText");
-
-      if (isApproved) {
-        if (circle) circle.setAttribute("stroke", "#84cc16");
-        heading.textContent = "APROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
-        badge.textContent = "ENCAMINHADO: APROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
-        feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
-      } else {
-        if (circle) circle.setAttribute("stroke", "#ef233c");
-        heading.textContent = "REPROVADO";
-        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
-        badge.textContent = "ENCAMINHADO: REPROVADO";
-        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
-        feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
-      }
-
-      switchView('screen-result');
-      sendDiscord(score, percent, isApproved);
-    }
-
-    function sendDiscord(score, percent, isApproved) {
-      const msg = document.getElementById("discordStatusMsg");
-
-      if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === "SUA_URL_DO_WEBHOOK_AQUI") {
-        msg.textContent = "ℹ️ Webhook não configurado no código. Resultado salvo localmente.";
-        return;
-      }
-
-      const payload = {
-        username: "Central de Provas • RedLine",
-        avatar_url: "https://i.imgur.com/8Q5N8mB.png",
-        embeds: [
-          {
-            title: isApproved ? "✅ CANDIDATO APROVADO • ESTAGIÁRIO" : "❌ CANDIDATO REPROVADO • ESTAGIÁRIO",
-            color: isApproved ? 0x84cc16 : 0xef233c,
-            description: `Um candidato concluiu a avaliação de estagiário na **Mecânica RedLine**.`,
-            fields: [
-              { name: "👤 Candidato", value: `**${candidateName}**`, inline: true },
-              { name: "🆔 Passaporte / ID", value: `\`${candidateId}\``, inline: true },
-              { name: "📊 Aproveitamento", value: `**${score}/10** (${percent}%)`, inline: true },
-              { name: "🎯 Nota Mínima", value: "7 / 10 pontos", inline: true },
-              { name: "🔑 Chave Utilizada", value: `\`${currentToken || "ACESSO_DIRETO"}\``, inline: true },
-              { name: "📅 Concluído em", value: new Date().toLocaleString("pt-BR"), inline: true }
-            ],
-            footer: { text: "RedLine Mecânica • Auditoria Interna" },
-            timestamp: new Date().toISOString()
-          }
-        ]
-      };
-
-      fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (res.ok) {
-          msg.textContent = "✓ Relatório registrado com sucesso no Discord da liderança!";
-          msg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
-        } else {
-          msg.textContent = "⚠️ Falha ao enviar para o Discord (verifique o Webhook).";
-        }
-      })
-      .catch(() => {
-        msg.textContent = "⚠️ Erro de rede ao comunicar com o Discord.";
-      });
-    }
-
-    function renderAnswerCard() {
-      const grid = document.getElementById("gridAnswerCard");
-      let count = 0;
-
-      grid.innerHTML = questions.map((q, idx) => {
-        const isCurrent = idx === currentQuestionIdx;
-        const ans = userAnswers[q.id];
-        if (ans) count++;
-
-        let border = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
-        if (isCurrent) {
-          border = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
-        } else if (ans) {
-          border = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
-        }
-
-        return `
-          <div class="border rounded-lg p-1.5 text-center transition-all ${border}">
-            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
-            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${ans ? ans.key : (isCurrent ? '•' : '')}</span>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById("displayAnsweredCount").textContent = `${count}/10`;
-    }
-
-    function startTimer() {
-      clearInterval(timerInterval);
-      timeLeft = TIME_PER_QUESTION;
-      updateTimerDisplay();
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          nextOrFinish();
-        }
-      }, 1000);
-    }
-
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("displayTimer").textContent = 
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
-      const circle = document.getElementById("timerCircle");
-      if (circle) circle.style.strokeDashoffset = offset;
-    }
-  </script>
-</body>
-</html>
+        if (userAnswers
