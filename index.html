@@ -70,7 +70,7 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 1. TELA: PAINEL DA LIDERANÇA (GERADOR DIRETO SEM TRAVA) -->
+    <!-- 1. TELA: PAINEL DA LIDERANÇA -->
     <div id="screen-leader" class="w-full max-w-md bg-[#0f1016] border border-red-900/80 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden" style="display: block;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -154,7 +154,7 @@
         </div>
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID (VINCULADO)</label>
-          <input type="text" id="candidateIdInput" readonly class="w-full bg-zinc-900/80 border border-zinc-800/80 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
+          <input type="text" id="candidateIdInput" readonly class="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
         </div>
       </div>
 
@@ -361,7 +361,7 @@
     // ==========================================
     // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
     // ==========================================
-    const DISCORD_WEBHOOK_URL = "SUA_URL_DO_WEBHOOK_AQUI"; // Cole aqui o webhook do Discord
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568780161493762078/jlFWx2USHM31Qf50h5_6bD-bkH8uwNbQFhYTbTi4R_WoZ0A3qJg2OiEfngZ-OL6rhYew";
     const MASTER_SECRET = "redline2026";
 
     // 10 QUESTÕES OFICIAIS COM RESPOSTA CORRETA EM TEXTO
@@ -579,7 +579,7 @@
       switchView('screen-leader');
     });
 
-    // GERADOR DIRETO DO LÍDER (SEM PRECISAR DE SUB-TELAS)
+    // GERADOR DIRETO DO LÍDER
     function generateLink() {
       const id = document.getElementById("genId").value.trim();
       const name = document.getElementById("genName").value.trim();
