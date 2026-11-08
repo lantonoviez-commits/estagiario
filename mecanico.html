@@ -107,7 +107,7 @@
           </div>
           <div>
             <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DO LÍDER</label>
-            <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+            <input type="password" id="inputLeaderPass" placeholder="Digite a senha de acesso" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
           </div>
         </div>
 
@@ -375,7 +375,7 @@
     // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
     // ==========================================
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568780161493762078/jlFWx2USHM31Qf50h5_6bD-bkH8uwNbQFhYTbTi4R_WoZ0A3qJg2OiEfngZ-OL6rhYew";
-    const MASTER_SECRET = "redline"; // SENHA ATUALIZADA
+    const MASTER_SECRET = "redline";
 
     // 16 QUESTÕES COMPLETAS DA PROVA DE PROMOÇÃO
     const baseQuestions = [
@@ -622,7 +622,6 @@
       });
     }
 
-    // Token único que agora vincula a tentativa (1 a 5)
     function createToken(id, attempt = "1") {
       const clean = String(id).trim().toLowerCase();
       let hash = 0;
@@ -683,7 +682,7 @@
       }
 
       if (pass !== MASTER_SECRET) {
-        alert("Senha da liderança incorreta! Digite: redline");
+        alert("Senha da liderança incorreta!");
         document.getElementById("inputLeaderPass").focus();
         return;
       }
