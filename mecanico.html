@@ -1,1 +1,934 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova de Promoção - Mecânico RedLine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #08080c;
+      color: #e5e7eb;
+    }
+    .font-heading {
+      font-family: 'Rajdhani', sans-serif;
+    }
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ef233c,
+        #ef233c 12px,
+        #08080c 12px,
+        #08080c 24px
+      );
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#08080c] text-zinc-200 selection:bg-red-600 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
 
+  <!-- CABEÇALHO SUPERIOR -->
+  <header class="border-b border-zinc-900 bg-[#0a0a0f]/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3.5">
+        <div class="relative w-11 h-11 flex-shrink-0 flex items-center justify-center">
+          <svg class="w-11 h-11 filter drop-shadow-[0_0_8px_rgba(239,35,60,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 8C48.5 8 47.5 9 47 10.5L45.5 15C42.5 15.8 39.8 17 37.2 18.5L33 16C31.8 15.2 30.2 15.5 29.2 16.5L25 20.7C24 21.7 23.7 23.3 24.5 24.5L27 28.7C25.5 31.3 24.3 34 23.5 37L19 38.5C17.5 39 16.5 40 16.5 41.5V47.5C16.5 49 17.5 50 19 50.5L23.5 52C24.3 55 25.5 57.7 27 60.3L24.5 64.5C23.7 65.7 24 67.3 25 68.3L29.2 72.5C30.2 73.5 31.8 73.8 33 73L37.2 70.5C39.8 72 42.5 73.2 45.5 74L47 78.5C47.5 80 48.5 81 50 81H56C57.5 81 58.5 80 59 78.5L60.5 74C63.5 73.2 66.2 72 68.8 70.5L73 73C74.2 73.8 75.8 73.5 76.8 72.5L81 68.3C82 67.3 82.3 65.7 81.5 64.5L79 60.3C80.5 57.7 81.7 55 82.5 52L87 50.5C88.5 50 89.5 49 89.5 47.5V41.5C89.5 40 88.5 39 87 38.5L82.5 37C81.7 34 80.5 31.3 79 28.7L81.5 24.5C82.3 23.3 82 21.7 81 20.7L76.8 16.5C75.8 15.5 74.2 15.2 73 16L68.8 18.5C66.2 17 63.5 15.8 60.5 15L59 10.5C58.5 9 57.5 8 56 8H50Z" fill="#18181e" stroke="#ef233c" stroke-width="2.5"/>
+            <circle cx="50" cy="44" r="23" fill="#0d0e14" stroke="#e5e7eb" stroke-width="1.5"/>
+            <path d="M40 32L50 44M60 32L50 44" stroke="#ef233c" stroke-width="3" stroke-linecap="round"/>
+            <rect x="36" y="27" width="8" height="6" rx="1.5" fill="#e5e7eb"/>
+            <rect x="56" y="27" width="8" height="6" rx="1.5" fill="#e5e7eb"/>
+            <circle cx="50" cy="44" r="6" fill="#ef233c"/>
+            <circle cx="50" cy="44" r="2.5" fill="#000000"/>
+            <rect x="18" y="52" width="64" height="15" rx="3" fill="#08080c" stroke="#ef233c" stroke-width="1.8"/>
+            <text x="50" y="63" font-family="'Rajdhani', sans-serif" font-weight="800" font-size="10" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">RED<tspan fill="#ef233c">LINE</tspan></text>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base font-bold font-heading tracking-wider text-white leading-none">
+            REDLINE <span class="text-red-500">MECÂNICA</span>
+          </h1>
+          <p class="text-[9px] text-zinc-500 tracking-widest font-heading mt-0.5">PROMOÇÃO • ESTAGIÁRIO → MECÂNICO</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="text-[11px] font-heading font-bold text-zinc-400 uppercase tracking-wider">ONLINE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGAÇÃO -->
+  <div class="max-w-5xl mx-auto w-full px-4 pt-4 flex items-center justify-between text-xs font-heading tracking-wider">
+    <span class="text-red-500 font-bold tracking-widest" id="navSubtitle">— PAINEL DA LIDERANÇA</span>
+    <span class="text-zinc-500">Mecânica RedLine - Promoção</span>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
+
+    <!-- 1. TELA: PAINEL DA LIDERANÇA (GERADOR DIRETO) -->
+    <div id="screen-leader" class="w-full max-w-md bg-[#0f1016] border border-red-900/80 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden" style="display: block;">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <div class="flex items-center justify-between mt-1">
+        <h3 class="text-xl font-extrabold font-heading text-white tracking-wider">PAINEL DA LIDERANÇA</h3>
+        <span class="px-2 py-0.5 rounded text-[10px] font-heading font-bold bg-red-950/80 text-red-400 border border-red-800/60">PROMOÇÃO</span>
+      </div>
+      <p class="text-xs text-zinc-400 mt-1">Gere o link individual para a prova de promoção de Mecânico.</p>
+
+      <div class="space-y-4 mt-5">
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">PASSAPORTE / ID DO ESTAGIÁRIO <span class="text-red-500">*</span></label>
+          <input type="text" id="genId" placeholder="Ex: 223" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        </div>
+
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">NOME DO ESTAGIÁRIO (OPCIONAL)</label>
+          <input type="text" id="genName" placeholder="Ex: Felipe S" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        </div>
+
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DE SEGURANÇA DO LÍDER</label>
+          <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline2026)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        </div>
+
+        <button type="button" onclick="generateLink()" class="w-full py-3 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
+          GERAR E COPIAR LINK DE PROMOÇÃO
+        </button>
+
+        <div id="box-link-output" class="p-3 bg-black/60 border border-zinc-800 rounded-xl mt-3" style="display: none;">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Link Gerado (já copiado):</span>
+          <input type="text" id="outputLink" readonly class="w-full bg-transparent text-[10px] text-emerald-400 font-mono mt-1 focus:outline-none select-all">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. TELA: CHAVE JÁ UTILIZADA OU BLOQUEADA POR F5 -->
+    <div id="screen-consumed" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <div class="w-16 h-16 rounded-full bg-red-600/10 border border-red-500/30 flex items-center justify-center mx-auto mt-2 text-2xl text-red-500">
+        🔒
+      </div>
+
+      <h2 class="text-2xl font-extrabold font-heading text-white tracking-wider mt-4">
+        ACESSO BLOQUEADO
+      </h2>
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-4 bg-red-950/60 text-red-400 border-red-800/50">
+        LINK CONSUMIDO OU RECARREGADO
+      </div>
+
+      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">
+        Esta avaliação de promoção é de uso único e foi consumida ou invalidada por atualização de página (F5). Não é permitido refazer a avaliação pelo mesmo link.
+      </p>
+
+      <div class="mt-6 pt-5 border-t border-zinc-800/80">
+        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
+          FALE COM A LIDERANÇA NO DISCORD.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. TELA: FOLHA DE ROSTO -->
+    <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" style="display: none;">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <div class="flex items-center justify-between pt-2">
+        <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">AVALIAÇÃO DE PROMOÇÃO • MECÂNICO</span>
+        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-amber-950/60 text-amber-400 border border-amber-800/50">PROMOÇÃO</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-wide mt-2">
+        PROVA DE MECÂNICO <span class="text-red-500">REDLINE</span>
+      </h2>
+
+      <!-- Campos do Candidato -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5 bg-zinc-900/40 border border-zinc-800/80 p-4 rounded-xl">
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">NOME DO CANDIDATO <span class="text-red-500">*</span></label>
+          <input type="text" id="candidateNameInput" placeholder="Digite seu nome completo" class="w-full bg-black/60 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+        </div>
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID (VINCULADO)</label>
+          <input type="text" id="candidateIdInput" readonly class="w-full bg-zinc-900/80 border border-zinc-800/80 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
+        </div>
+      </div>
+
+      <!-- Métricas -->
+      <div class="grid grid-cols-4 gap-2 text-center my-5">
+        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Questões</span>
+          <span class="text-base font-bold font-heading text-white">16</span>
+        </div>
+        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Tempo / qst</span>
+          <span class="text-base font-bold font-heading text-red-400">90s</span>
+        </div>
+        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontuação máx.</span>
+          <span class="text-base font-bold font-heading text-white">16 pts</span>
+        </div>
+        <div class="bg-black/40 border border-zinc-800/80 p-2.5 rounded-xl border-red-500/30">
+          <span class="text-[9px] uppercase font-bold text-red-500 font-heading block">Aprovação</span>
+          <span class="text-base font-bold font-heading text-lime-400">12 pts</span>
+        </div>
+      </div>
+
+      <!-- Faixas de Avaliação -->
+      <div class="space-y-2 text-xs text-zinc-400 my-5 bg-black/30 p-4 rounded-xl border border-zinc-800/60">
+        <h4 class="text-xs font-bold text-white font-heading tracking-wider uppercase mb-2">FAIXAS DE RESULTADO (REGRA OFICIAL)</h4>
+        <div class="flex items-center justify-between border-b border-zinc-800/60 pb-1.5 text-[11px]">
+          <span class="text-lime-400 font-bold">✓ 12 a 16 PONTOS:</span>
+          <span class="text-zinc-200">APROVADO (Cargo: Mecânico [MEC])</span>
+        </div>
+        <div class="flex items-center justify-between border-b border-zinc-800/60 py-1.5 text-[11px]">
+          <span class="text-amber-400 font-bold">⚠ 8 a 11 PONTOS:</span>
+          <span class="text-zinc-300">REPROVADO - FARMAR 150 KITS</span>
+        </div>
+        <div class="flex items-center justify-between pt-1.5 text-[11px]">
+          <span class="text-red-400 font-bold">✕ 0 a 7 PONTOS:</span>
+          <span class="text-zinc-400">REPROVADO - FARMAR 300 KITS</span>
+        </div>
+      </div>
+
+      <!-- Confirmação e Início -->
+      <div class="pt-2 border-t border-zinc-800 space-y-4">
+        <label class="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-300 select-none">
+          <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-600 focus:ring-0 cursor-pointer">
+          <span>Estou ciente das regras e pronto para iniciar a prova de promoção. <span class="text-red-500">*</span></span>
+        </label>
+        
+        <button type="button" onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 active:scale-[0.99] text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
+          COMEÇAR PROVA DE PROMOÇÃO
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. TELA: EXECUÇÃO DA QUESTÃO -->
+    <div id="screen-exam" class="w-full grid grid-cols-1 lg:grid-cols-12 gap-6" style="display: none;">
+      <div class="lg:col-span-8 bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+        <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
+
+        <div>
+          <div class="flex items-center justify-between pt-1 border-b border-zinc-800 pb-3">
+            <div>
+              <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider block">AVALIAÇÃO DE PROMOÇÃO • MECÂNICO</span>
+              <h3 class="text-xl font-extrabold font-heading text-white tracking-wide mt-0.5">
+                QUESTÃO <span class="text-red-500" id="displayQuestionIndex">01 / 16</span>
+              </h3>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <div class="relative w-12 h-12 flex items-center justify-center">
+                <svg class="w-12 h-12 -rotate-90">
+                  <circle cx="24" cy="24" r="20" stroke="#27272a" stroke-width="3" fill="none" />
+                  <circle id="timerCircle" cx="24" cy="24" r="20" stroke="#ef233c" stroke-width="3" fill="none" stroke-dasharray="125.6" stroke-dashoffset="0" class="transition-all duration-1000 ease-linear" />
+                </svg>
+                <span class="absolute font-heading font-bold text-xs text-white" id="displayTimer">01:30</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-wider">1 PONTO • MARQUE APENAS UMA ALTERNATIVA</span>
+            <h4 class="text-base sm:text-lg font-bold font-heading text-white tracking-wide mt-2 min-h-[48px]" id="displayQuestionTitle"></h4>
+          </div>
+
+          <div class="space-y-2.5 mt-4" id="displayOptionsContainer"></div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between">
+          <span class="text-[11px] text-zinc-500">Selecione uma opção e avance</span>
+          <button type="button" onclick="nextOrFinish()" id="btnNextQuestion" class="py-2.5 px-6 rounded-xl font-heading font-extrabold text-xs tracking-wider uppercase bg-red-600 hover:bg-red-500 active:scale-[0.99] text-white shadow-[0_0_12px_rgba(239,35,60,0.3)] transition-all cursor-pointer">
+            PRÓXIMA QUESTÃO →
+          </button>
+        </div>
+      </div>
+
+      <!-- Lateral -->
+      <div class="lg:col-span-4 space-y-4">
+        <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">CANDIDATO</span>
+          <h4 class="text-sm font-bold font-heading text-white" id="displayCandidateName">---</h4>
+          <span class="text-[10px] text-zinc-500 font-heading">PROMOÇÃO Nº <span id="displayCandidateId" class="text-zinc-300">---</span></span>
+        </div>
+
+        <div class="bg-[#0f1016] border border-zinc-800 rounded-2xl p-4 shadow-xl">
+          <div class="flex items-center justify-between mb-3 border-b border-zinc-800 pb-2">
+            <span class="text-[10px] font-bold font-heading text-zinc-400 uppercase tracking-wider">CARTÃO-RESPOSTA</span>
+            <span class="text-[11px] font-heading font-bold text-red-500" id="displayAnsweredCount">0/16</span>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2" id="gridAnswerCard"></div>
+
+          <div class="flex items-center justify-between text-[10px] text-zinc-500 font-heading pt-4 mt-4 border-t border-zinc-800/80">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> Atual</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-zinc-400"></span> Respondida</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-zinc-800"></span> Em branco</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. TELA: BOLETIM DE RESULTADO -->
+    <div id="screen-result" class="w-full max-w-xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest block pt-2">BOLETIM DE PROMOÇÃO • MECÂNICO</span>
+      <h3 class="text-sm font-bold font-heading text-zinc-300 mt-1" id="resultCandidateName">---</h3>
+
+      <div class="flex justify-center my-6">
+        <div class="relative w-36 h-36 flex items-center justify-center">
+          <svg class="w-36 h-36 -rotate-90">
+            <circle cx="72" cy="72" r="58" stroke="#1f2937" stroke-width="8" fill="none" />
+            <circle id="resultProgressCircle" cx="72" cy="72" r="58" stroke="#ef233c" stroke-width="8" fill="none" stroke-dasharray="364.4" stroke-dashoffset="182.2" class="transition-all duration-1000 ease-out" />
+          </svg>
+          <div class="absolute flex flex-col items-center">
+            <span class="text-3xl font-extrabold font-heading text-white" id="resultPercentText">0%</span>
+            <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading">Aproveitamento</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-extrabold font-heading tracking-wider" id="resultStatusHeading">REPROVADO</h2>
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6" id="resultStatusBadge">
+        STATUS
+      </div>
+
+      <div class="grid grid-cols-3 gap-2 text-center mb-6">
+        <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Pontos</span>
+          <span class="text-base font-bold font-heading text-white" id="resultFinalScore">0/16</span>
+        </div>
+        <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl">
+          <span class="text-[9px] uppercase font-bold text-zinc-500 font-heading block">Acertos</span>
+          <span class="text-base font-bold font-heading text-white" id="resultCorrectCount">0/16</span>
+        </div>
+        <div class="bg-black/40 border border-zinc-800/80 p-3 rounded-xl border-red-500/30">
+          <span class="text-[9px] uppercase font-bold text-red-500 font-heading block">Meta Mínima</span>
+          <span class="text-base font-bold font-heading text-lime-400">12 pts</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-zinc-400" id="resultFeedbackText"></p>
+
+      <div id="discordStatusMsg" class="mt-4 p-2.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-[11px] text-zinc-400">
+        Enviando relatório de promoção para a liderança no Discord...
+      </div>
+
+      <div class="mt-6 pt-5 border-t border-zinc-800/80">
+        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
+          🔒 AVALIAÇÃO CONCLUÍDA • RELATÓRIO OFICIAL REGISTRADO
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: CONFIRMAR ENTREGA -->
+  <div id="modalConfirmSubmit" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" style="display: none;">
+    <div class="w-full max-w-sm bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
+      <h3 class="text-lg font-extrabold font-heading text-white tracking-wide mt-2">ENTREGAR A PROVA DE PROMOÇÃO?</h3>
+      <p class="text-xs text-zinc-400 mt-2">
+        Após entregar, seu relatório de promoção será emitido imediatamente no canal da liderança.
+      </p>
+      <div class="grid grid-cols-2 gap-3 mt-6">
+        <button type="button" onclick="document.getElementById('modalConfirmSubmit').style.display = 'none'" class="py-2.5 rounded-xl font-heading font-bold text-xs uppercase bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-all cursor-pointer">
+          Revisar questão
+        </button>
+        <button type="button" onclick="finishExam()" class="py-2.5 rounded-xl font-heading font-extrabold text-xs uppercase bg-red-600 hover:bg-red-500 text-white shadow-[0_0_12px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
+          ENTREGAR
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-zinc-900 bg-[#0a0a0f] py-3 text-center text-[10px] text-zinc-600 font-heading tracking-wider">
+    REDLINE MECÂNICA • AVALIAÇÃO DE PROMOÇÃO • TODOS OS DIREITOS RESERVADOS
+  </footer>
+
+  <script>
+    // ==========================================
+    // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
+    // ==========================================
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568780161493762078/jlFWx2USHM31Qf50h5_6bD-bkH8uwNbQFhYTbTi4R_WoZ0A3qJg2OiEfngZ-OL6rhYew";
+    const MASTER_SECRET = "redline2026";
+
+    // 16 QUESTÕES COMPLETAS DA PROVA DE PROMOÇÃO
+    const baseQuestions = [
+      {
+        id: 1,
+        title: "QUAIS ITENS ESTÃO INCLUSOS NO FULL TUNING?",
+        options: [
+          "MOTOR, TURBO, SUSPENSÃO E TRANSMISSÃO.",
+          "MOTOR, SUSPENSÃO, TRASMISSÃO E FREIO.",
+          "MOTOR, TURBO, TRANSMISSÃO E FREIO.",
+          "MOTOR, TURBO, SUSPENSÃO E FREIO.",
+          "O QUE EU QUISER."
+        ],
+        correctText: "MOTOR, TURBO, TRANSMISSÃO E FREIO."
+      },
+      {
+        id: 2,
+        title: "QUAL A UNICA PEÇA DE ROUPA QUE PODE SER ALTERADA DO UNIFORME?",
+        options: [
+          "CALÇA E TÊNIS",
+          "JAQUETA E CHAPÉU",
+          "CALÇA E CHAPÉU",
+          "NENHUMA DAS ALTERNATIVAS.",
+          "JAQUETA E TÊNIS",
+          "TÊNIS"
+        ],
+        correctText: "TÊNIS"
+      },
+      {
+        id: 3,
+        title: "QUAL VALOR DA FULL BLINDAGEM COM PARCERIA?",
+        options: [
+          "1KK600",
+          "1KK400",
+          "1KK550",
+          "NENHUMA DAS ALTERNATIVAS",
+          "1KK700"
+        ],
+        correctText: "1KK600"
+      },
+      {
+        id: 4,
+        title: "É PERMITIDO CORRER ATRÁS DE CLIENTE PELA MECÂNICA?",
+        options: [
+          "TALVEZ.",
+          "NÃO.",
+          "SE O PEXE DEIXAR, SIM.",
+          "SIM.",
+          "EU QUE DECIDO."
+        ],
+        correctText: "NÃO."
+      },
+      {
+        id: 5,
+        title: "QUAL O VALOR DA RODA COM E SEM PARCERIA?",
+        options: [
+          "80K COM PARCERIA, 90K SEM PARCERIA..",
+          "70K COM PARCERIA, 100K SEM PARCERIA..",
+          "60K COM PARCERIA, 70K SEM PARCERIA..",
+          "90K COM PARCERIA, 100K SEM PARCERIA..",
+          "70K COM PARCERIA, 80K SEM PARCERIA.."
+        ],
+        correctText: "70K COM PARCERIA, 100K SEM PARCERIA.."
+      },
+      {
+        id: 6,
+        title: "CLIENTE PEDIU UMA METÁLICA COMO PRIMEIRA, UM METÁLICO COMO SECUNDÁRIO E PEROLADO. QUAL VALOR TOTAL DAS MANUTENÇÕES SEM PARCERIA?",
+        options: [
+          "100K + 100K + 100K = 300K.",
+          "60K + 60K + 90K = 210K.",
+          "NENHUMA DAS ALTERNATIVAS.",
+          "80K + 80K + 90K = 250K.",
+          "70K + 70K + 90K = 230K."
+        ],
+        correctText: "70K + 70K + 90K = 230K."
+      },
+      {
+        id: 7,
+        title: "PODE SAIR COM ROUPA DA MECÂNICA E COM TOOGLE LIGADO PARA RANDOLAR OU CONHECER A CIDADE?",
+        options: [
+          "NENHUMA DAS OPÇÕES.",
+          "SIM.",
+          "TALVEZ.",
+          "NÃO.",
+          "SE EU QUISER."
+        ],
+        correctText: "NÃO."
+      },
+      {
+        id: 8,
+        title: "QUAL ITEM É POSSIVEL FAZER EM HELICOPTERO?",
+        options: [
+          "FREIO.",
+          "TURBO",
+          "TRANSMISSÃO.",
+          "MOTOR."
+        ],
+        correctText: "TURBO"
+      },
+      {
+        id: 9,
+        title: "É OBRIGATÓRIO USAR ROUPA DA MECÂNICA PARA FARMAR?",
+        options: [
+          "TALVEZ.",
+          "LÓGICO QUE NÃO.",
+          "EU QUE DECIDO.",
+          "SIM.",
+          "NÃO."
+        ],
+        correctText: "SIM."
+      },
+      {
+        id: 10,
+        title: "QUAL VALOR DOS KITS COM E SEM PARCERIA?",
+        options: [
+          "NENHUMA DAS OPÇÕES.",
+          "2K COM PARCERIA, 3K SEM PARCERIA.",
+          "4K COM PARCERIA, 6K SEM PARCERIA.",
+          "3K COM PARCERIA, 5K SEM PARCERIA.",
+          "3K COM PARCERIA, 8K SEM PARCERIA."
+        ],
+        correctText: "3K COM PARCERIA, 5K SEM PARCERIA."
+      },
+      {
+        id: 11,
+        title: "É PERMITIDO USO DE MÁSCARA EM SERVIÇO?",
+        options: [
+          "SIM.",
+          "SOMENTE LÍDERES.",
+          "NÃO.",
+          "TALVET.",
+          "COMO EU PREFERIR."
+        ],
+        correctText: "NÃO."
+      },
+      {
+        id: 12,
+        title: "PODE USAR BLIPS DE OUTRA MECÂNICA?",
+        options: [
+          "SIM.",
+          "TALVEZ.",
+          "SÓ QUANDO PRECISAR.",
+          "NENHUMA DAS ALTERNATIVAS.",
+          "NÃO."
+        ],
+        correctText: "NÃO."
+      },
+      {
+        id: 13,
+        title: "QUAL A FREQUÊNCIA DA RÁDIO DA MECÂNICA?",
+        options: [
+          "21.",
+          "17",
+          "18",
+          "19",
+          "NENHUMA DAS ALTERNATIVAS."
+        ],
+        correctText: "17"
+      },
+      {
+        id: 14,
+        title: "QUAL O VALOR DO FULL TUNING COM PARCERIA?",
+        options: [
+          "500K",
+          "550K",
+          "600K",
+          "1KK700",
+          "NENHUMA DAS ALTERNATIVAS."
+        ],
+        correctText: "550K"
+      },
+      {
+        id: 15,
+        title: "QUAL O ÚNICO CARGO PERMITIDO A MODIFICAR UNIFORMES?",
+        options: [
+          "GERENTE GERAL",
+          "MECÂNICOS",
+          "MECÂNICO APRENDIZ",
+          "SOMENTE LÍDERES.",
+          "GERENTES."
+        ],
+        correctText: "SOMENTE LÍDERES."
+      },
+      {
+        id: 16,
+        title: "PODE FARMAR USANDO CARRO PESSOAL?",
+        options: [
+          "TALVES",
+          "NÃO.",
+          "SIM.",
+          "NENHUMA DAS ALTERNATIVAS.",
+          "DEPENDE DO DIA"
+        ],
+        correctText: "SIM."
+      }
+    ];
+
+    let questions = [];
+    let currentQuestionIdx = 0;
+    let userAnswers = {};
+    let candidateName = "";
+    let candidateId = "";
+    let currentToken = "";
+    let timeLeft = 90;
+    let timerInterval = null;
+    const TIME_PER_QUESTION = 90;
+
+    function switchView(targetScreenId) {
+      const screens = ['screen-leader', 'screen-instructions', 'screen-consumed', 'screen-exam', 'screen-result'];
+      screens.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.display = (id === targetScreenId) ? (id === 'screen-exam' ? 'grid' : 'block') : 'none';
+        }
+      });
+      const navSubtitle = document.getElementById('navSubtitle');
+      if (navSubtitle) {
+        if (targetScreenId === 'screen-leader') navSubtitle.textContent = '— PAINEL DA LIDERANÇA';
+        else if (targetScreenId === 'screen-consumed') navSubtitle.textContent = '— ACESSO BLOQUEADO';
+        else navSubtitle.textContent = '— PROVA • PROMOÇÃO MECÂNICO';
+      }
+    }
+
+    function shuffle(arr) {
+      const array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function buildQuestions() {
+      const letters = ["A", "B", "C", "D", "E", "F"];
+      questions = baseQuestions.map(q => {
+        const shuffled = shuffle(q.options);
+        return {
+          id: q.id,
+          title: q.title,
+          options: shuffled.map((txt, idx) => ({ key: letters[idx], text: txt })),
+          correctText: q.correctText
+        };
+      });
+    }
+
+    function createToken(id) {
+      const clean = String(id).trim().toLowerCase();
+      let hash = 0;
+      const str = `${MASTER_SECRET}_PROMOMEC_${clean}`;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash).toString(16).toUpperCase();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const paramId = params.get("id");
+      const paramChave = params.get("chave") || params.get("token");
+      const paramNome = params.get("nome");
+
+      if (paramId && paramChave) {
+        const expected = createToken(paramId);
+        const cleanToken = paramChave.toUpperCase().trim();
+
+        if (cleanToken === expected) {
+          if (localStorage.getItem(`redline_promocao_${cleanToken}`)) {
+            switchView('screen-consumed');
+            return;
+          }
+
+          currentToken = cleanToken;
+          document.getElementById("candidateIdInput").value = paramId;
+          document.getElementById("candidateIdInput").readOnly = true;
+          if (paramNome) {
+            document.getElementById("candidateNameInput").value = paramNome;
+          }
+          switchView('screen-instructions');
+          return;
+        }
+      }
+
+      switchView('screen-leader');
+    });
+
+    function generateLink() {
+      const id = document.getElementById("genId").value.trim();
+      const name = document.getElementById("genName").value.trim();
+      const pass = document.getElementById("inputLeaderPass").value.trim();
+
+      if (!id) {
+        alert("Preencha o Passaporte / ID do estagiário.");
+        document.getElementById("genId").focus();
+        return;
+      }
+
+      if (pass !== MASTER_SECRET) {
+        alert("Senha da liderança incorreta! Digite: redline2026");
+        document.getElementById("inputLeaderPass").focus();
+        return;
+      }
+
+      const token = createToken(id);
+      const url = new URL(window.location.href);
+      url.search = "";
+      url.searchParams.set("id", id);
+      url.searchParams.set("chave", token);
+      if (name) url.searchParams.set("nome", name);
+
+      const finalLink = url.toString();
+
+      navigator.clipboard.writeText(finalLink).then(() => {
+        document.getElementById("outputLink").value = finalLink;
+        document.getElementById("box-link-output").style.display = "block";
+        alert(`Link de promoção gerado e COPIADO para o ID ${id}! Envie ao estagiário.`);
+      }).catch(() => {
+        document.getElementById("outputLink").value = finalLink;
+        document.getElementById("box-link-output").style.display = "block";
+      });
+    }
+
+    function startExam() {
+      const name = document.getElementById("candidateNameInput").value.trim();
+      const id = document.getElementById("candidateIdInput").value.trim();
+      const agree = document.getElementById("checkAgree").checked;
+
+      if (!name) {
+        alert("Por favor, preencha o Nome do Candidato.");
+        return;
+      }
+      if (!id) {
+        alert("Por favor, preencha o Passaporte / ID.");
+        return;
+      }
+      if (!agree) {
+        alert("Marque a caixa confirmando que concorda com as instruções.");
+        return;
+      }
+
+      if (currentToken) {
+        localStorage.setItem(`redline_promocao_${currentToken}`, "true");
+      }
+
+      candidateName = name;
+      candidateId = id;
+
+      document.getElementById("displayCandidateName").textContent = candidateName;
+      document.getElementById("displayCandidateId").textContent = candidateId;
+
+      buildQuestions();
+      userAnswers = {};
+      currentQuestionIdx = 0;
+
+      switchView('screen-exam');
+      loadQuestion(0);
+    }
+
+    function loadQuestion(index) {
+      currentQuestionIdx = index;
+      const q = questions[index];
+
+      document.getElementById("displayQuestionIndex").textContent = `${String(index + 1).padStart(2, '0')} / ${questions.length}`;
+      document.getElementById("displayQuestionTitle").textContent = q.title;
+
+      const nextBtn = document.getElementById("btnNextQuestion");
+      nextBtn.textContent = (index === questions.length - 1) ? "ENTREGAR PROVA" : "PRÓXIMA QUESTÃO →";
+
+      const container = document.getElementById("displayOptionsContainer");
+      container.innerHTML = q.options.map(opt => {
+        const isSelected = userAnswers[q.id]?.text === opt.text;
+        return `
+          <div 
+            onclick="selectOption('${opt.key}', '${encodeURIComponent(opt.text)}')" 
+            class="border rounded-xl p-3.5 flex items-center gap-3 cursor-pointer transition-all select-none ${isSelected ? 'border-red-500 bg-red-950/30 shadow-[0_0_12px_rgba(239,35,60,0.3)]' : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-700'}"
+          >
+            <div class="w-7 h-7 rounded-lg flex items-center justify-center font-heading font-bold text-xs border transition-all ${isSelected ? 'bg-red-600 border-red-500 text-white' : 'border-zinc-700 bg-zinc-800 text-zinc-300'}">
+              ${opt.key}
+            </div>
+            <span class="text-xs font-semibold ${isSelected ? 'text-white' : 'text-zinc-300'}">${opt.text}</span>
+          </div>
+        `;
+      }).join('');
+
+      renderAnswerCard();
+      startTimer();
+    }
+
+    function selectOption(key, encodedText) {
+      const q = questions[currentQuestionIdx];
+      userAnswers[q.id] = { key: key, text: decodeURIComponent(encodedText) };
+      loadQuestion(currentQuestionIdx);
+    }
+
+    function nextOrFinish() {
+      if (currentQuestionIdx === questions.length - 1) {
+        document.getElementById("modalConfirmSubmit").style.display = "flex";
+      } else {
+        clearInterval(timerInterval);
+        loadQuestion(currentQuestionIdx + 1);
+      }
+    }
+
+    function finishExam() {
+      clearInterval(timerInterval);
+      document.getElementById("modalConfirmSubmit").style.display = "none";
+
+      let score = 0;
+      questions.forEach(q => {
+        if (userAnswers[q.id] && userAnswers[q.id].text === q.correctText) {
+          score++;
+        }
+      });
+
+      const total = questions.length;
+      const percent = Math.round((score / total) * 100);
+
+      // FAIXAS OFICIAIS DE PROMOÇÃO:
+      // 12 a 16: APROVADO
+      // 8 a 11: REPROVADO - FARM 150 KITS
+      // 0 a 7: REPROVADO - FARM 300 KITS
+      let statusTitle = "";
+      let statusBadgeText = "";
+      let statusColorHex = 0xef233c;
+      let badgeClass = "";
+      let feedbackMsg = "";
+
+      if (score >= 12) {
+        statusTitle = "APROVADO";
+        statusBadgeText = "ENCAMINHADO: APROVADO 『 MEC 』";
+        statusColorHex = 0x84cc16;
+        badgeClass = "bg-lime-500/10 text-lime-400 border-lime-500/30";
+        feedbackMsg = "Parabéns! Você atingiu a pontuação para a promoção e agora assume o cargo de Mecânico.";
+      } else if (score >= 8) {
+        statusTitle = "REPROVADO - FARM 150 KITS";
+        statusBadgeText = "ENCAMINHADO: REPROVADO (FARM 150 KITS)";
+        statusColorHex = 0xf59e0b;
+        badgeClass = "bg-amber-500/10 text-amber-400 border-amber-500/30";
+        feedbackMsg = "Você atingiu entre 8 e 11 pontos. Conforme as regras, deverá farmar 150 kits antes da próxima tentativa.";
+      } else {
+        statusTitle = "REPROVADO - FARM 300 KITS";
+        statusBadgeText = "ENCAMINHADO: REPROVADO (FARM 300 KITS)";
+        statusColorHex = 0xef233c;
+        badgeClass = "bg-red-500/10 text-red-400 border-red-500/30";
+        feedbackMsg = "Pontuação abaixo de 8 pontos. Conforme as regras, deverá farmar 300 kits antes de refazer a prova.";
+      }
+
+      document.getElementById("resultCandidateName").textContent = candidateName;
+      document.getElementById("resultPercentText").textContent = `${percent}%`;
+      document.getElementById("resultFinalScore").textContent = `${score}/${total}`;
+      document.getElementById("resultCorrectCount").textContent = `${score}/${total}`;
+
+      const offset = 364.4 - (364.4 * percent) / 100;
+      const circle = document.getElementById("resultProgressCircle");
+      if (circle) {
+        circle.style.strokeDashoffset = offset;
+        circle.setAttribute("stroke", score >= 12 ? "#84cc16" : (score >= 8 ? "#f59e0b" : "#ef233c"));
+      }
+
+      const heading = document.getElementById("resultStatusHeading");
+      const badge = document.getElementById("resultStatusBadge");
+      const feedback = document.getElementById("resultFeedbackText");
+
+      heading.textContent = statusTitle;
+      heading.className = `text-2xl sm:text-3xl font-extrabold font-heading tracking-wider ${score >= 12 ? 'text-lime-400' : (score >= 8 ? 'text-amber-400' : 'text-red-500')}`;
+      
+      badge.textContent = statusBadgeText;
+      badge.className = `inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 ${badgeClass}`;
+
+      feedback.textContent = feedbackMsg;
+
+      switchView('screen-result');
+      sendDiscord(score, total, percent, statusTitle, statusColorHex);
+    }
+
+    function sendDiscord(score, total, percent, statusTitle, colorHex) {
+      const msg = document.getElementById("discordStatusMsg");
+
+      const payload = {
+        username: "Central de Promoção • RedLine",
+        avatar_url: "https://i.imgur.com/8Q5N8mB.png",
+        embeds: [
+          {
+            title: `🔧 AVALIAÇÃO DE PROMOÇÃO: ${statusTitle}`,
+            color: colorHex,
+            description: `Um estagiário concluiu a prova oficial de promoção para **Mecânico** da RedLine.`,
+            fields: [
+              { name: "👤 Candidato", value: `**${candidateName}**`, inline: true },
+              { name: "🆔 Passaporte / ID", value: `\`${candidateId}\``, inline: true },
+              { name: "📊 Aproveitamento", value: `**${score}/${total} pts** (${percent}%)`, inline: true },
+              { name: "🎯 Meta Mínima", value: "12 / 16 pontos", inline: true },
+              { name: "📋 Veredito Oficial", value: `**${statusTitle}**`, inline: true },
+              { name: "🔑 Chave Utilizada", value: `\`${currentToken || "ACESSO_DIRETO"}\``, inline: true },
+              { name: "📅 Concluído em", value: new Date().toLocaleString("pt-BR"), inline: true }
+            ],
+            footer: { text: "RedLine Mecânica • Painel de Gestão e Promoções" },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          msg.textContent = "✓ Relatório de promoção registrado com sucesso no Discord da liderança!";
+          msg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
+        } else {
+          msg.textContent = "⚠️ Falha ao enviar para o Discord.";
+        }
+      })
+      .catch(() => {
+        msg.textContent = "⚠️ Erro de rede ao comunicar com o Discord.";
+      });
+    }
+
+    function renderAnswerCard() {
+      const grid = document.getElementById("gridAnswerCard");
+      let count = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const isCurrent = idx === currentQuestionIdx;
+        const ans = userAnswers[q.id];
+        if (ans) count++;
+
+        let border = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
+        if (isCurrent) {
+          border = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
+        } else if (ans) {
+          border = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
+        }
+
+        return `
+          <div class="border rounded-lg p-1.5 text-center transition-all ${border}">
+            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${ans ? ans.key : (isCurrent ? '•' : '')}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("displayAnsweredCount").textContent = `${count}/${questions.length}`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = TIME_PER_QUESTION;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          nextOrFinish();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("displayTimer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
+      const circle = document.getElementById("timerCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+    }
+  </script>
+</body>
+</html>
