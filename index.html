@@ -107,7 +107,7 @@
           </div>
           <div>
             <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DO LÍDER</label>
-            <input type="password" id="inputLeaderPass" placeholder="Digite a senha (redline)" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
+            <input type="password" id="inputLeaderPass" placeholder="Digite a senha de acesso" class="w-full bg-black/60 border border-zinc-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 mt-1">
           </div>
         </div>
 
@@ -380,7 +380,7 @@
     // CONFIGURAÇÃO DO DISCORD E CREDENCIAIS
     // ==========================================
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568780161493762078/jlFWx2USHM31Qf50h5_6bD-bkH8uwNbQFhYTbTi4R_WoZ0A3qJg2OiEfngZ-OL6rhYew";
-    const MASTER_SECRET = "redline"; // SENHA ATUALIZADA
+    const MASTER_SECRET = "redline";
 
     // 10 QUESTÕES OFICIAIS COM RESPOSTA CORRETA EM TEXTO
     const baseQuestions = [
@@ -555,7 +555,6 @@
       });
     }
 
-    // Geração com suporte a até 5 tentativas independentes por ID
     function createToken(id, attempt = "1") {
       const clean = String(id).trim().toLowerCase();
       let hash = 0;
@@ -601,11 +600,10 @@
         }
       }
 
-      // Se entrou sem chave válida, cai sempre no painel do líder
       switchView('screen-leader');
     });
 
-    // GERADOR DIRETO DO LÍDER COM SUPORTE A ATÉ 5 TENTATIVAS
+    // GERADOR DO LÍDER
     function generateLink() {
       const id = document.getElementById("genId").value.trim();
       const name = document.getElementById("genName").value.trim();
@@ -619,7 +617,7 @@
       }
 
       if (pass !== MASTER_SECRET) {
-        alert("Senha da liderança incorreta! Digite: redline");
+        alert("Senha da liderança incorreta!");
         document.getElementById("inputLeaderPass").focus();
         return;
       }
@@ -734,4 +732,148 @@
 
       let score = 0;
       questions.forEach(q => {
-        if (userAnswers
+        if (userAnswers[q.id] && userAnswers[q.id].text === q.correctText) {
+          score++;
+        }
+      });
+
+      const percent = (score / 10) * 100;
+      const isApproved = score >= 7;
+
+      document.getElementById("resultCandidateName").textContent = candidateName;
+      document.getElementById("resultPercentText").textContent = `${percent}%`;
+      document.getElementById("resultFinalScore").textContent = `${score}/10`;
+      document.getElementById("resultCorrectCount").textContent = `${score}/10`;
+
+      const offset = 364.4 - (364.4 * percent) / 100;
+      const circle = document.getElementById("resultProgressCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+
+      const heading = document.getElementById("resultStatusHeading");
+      const badge = document.getElementById("resultStatusBadge");
+      const feedback = document.getElementById("resultFeedbackText");
+
+      if (isApproved) {
+        if (circle) circle.setAttribute("stroke", "#84cc16");
+        heading.textContent = "APROVADO";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-lime-400";
+        badge.textContent = "ENCAMINHADO: APROVADO";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-lime-500/10 text-lime-400 border-lime-500/30";
+        feedback.textContent = "Parabéns! Você atingiu a nota mínima. Apresente este resultado à liderança no Discord.";
+      } else {
+        if (circle) circle.setAttribute("stroke", "#ef233c");
+        heading.textContent = "REPROVADO";
+        heading.className = "text-3xl font-extrabold font-heading tracking-wider text-red-500";
+        badge.textContent = "ENCAMINHADO: REPROVADO";
+        badge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-6 bg-red-500/10 text-red-400 border-red-500/30";
+        feedback.textContent = "Você não atingiu a nota mínima de 7 pontos. Fale com um líder no Discord para os próximos passos.";
+      }
+
+      switchView('screen-result');
+      sendDiscord(score, percent, isApproved);
+    }
+
+    function sendDiscord(score, percent, isApproved) {
+      const msg = document.getElementById("discordStatusMsg");
+
+      if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === "SUA_URL_DO_WEBHOOK_AQUI") {
+        msg.textContent = "ℹ️ Webhook não configurado no código. Resultado salvo localmente.";
+        return;
+      }
+
+      const payload = {
+        username: "Central de Provas • RedLine",
+        avatar_url: "https://i.imgur.com/8Q5N8mB.png",
+        embeds: [
+          {
+            title: isApproved ? "✅ CANDIDATO APROVADO • ESTAGIÁRIO" : "❌ CANDIDATO REPROVADO • ESTAGIÁRIO",
+            color: isApproved ? 0x84cc16 : 0xef233c,
+            description: `Um candidato concluiu a avaliação de estagiário na **Mecânica RedLine**.`,
+            fields: [
+              { name: "👤 Candidato", value: `**${candidateName}**`, inline: true },
+              { name: "🆔 Passaporte / ID", value: `\`${candidateId}\``, inline: true },
+              { name: "🔄 Tentativa", value: `**${currentAttempt}ª Tentativa**`, inline: true },
+              { name: "📊 Aproveitamento", value: `**${score}/10** (${percent}%)`, inline: true },
+              { name: "🎯 Nota Mínima", value: "7 / 10 pontos", inline: true },
+              { name: "🔑 Chave Utilizada", value: `\`${currentToken || "ACESSO_DIRETO"}\``, inline: true },
+              { name: "📅 Concluído em", value: new Date().toLocaleString("pt-BR"), inline: true }
+            ],
+            footer: { text: "RedLine Mecânica • Auditoria Interna" },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          msg.textContent = "✓ Relatório registrado com sucesso no Discord da liderança!";
+          msg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
+        } else {
+          msg.textContent = "⚠️ Falha ao enviar para o Discord (verifique o Webhook).";
+        }
+      })
+      .catch(() => {
+        msg.textContent = "⚠️ Erro de rede ao comunicar com o Discord.";
+      });
+    }
+
+    function renderAnswerCard() {
+      const grid = document.getElementById("gridAnswerCard");
+      let count = 0;
+
+      grid.innerHTML = questions.map((q, idx) => {
+        const isCurrent = idx === currentQuestionIdx;
+        const ans = userAnswers[q.id];
+        if (ans) count++;
+
+        let border = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
+        if (isCurrent) {
+          border = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
+        } else if (ans) {
+          border = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
+        }
+
+        return `
+          <div class="border rounded-lg p-1.5 text-center transition-all ${border}">
+            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${ans ? ans.key : (isCurrent ? '•' : '')}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById("displayAnsweredCount").textContent = `${count}/10`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = TIME_PER_QUESTION;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          nextOrFinish();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById("displayTimer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
+      const circle = document.getElementById("timerCircle");
+      if (circle) circle.style.strokeDashoffset = offset;
+    }
+  </script>
+</body>
+</html>
