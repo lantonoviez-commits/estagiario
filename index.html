@@ -63,21 +63,20 @@
 
   <!-- NAVEGAÇÃO -->
   <div class="max-w-5xl mx-auto w-full px-4 pt-4 flex items-center justify-between text-xs font-heading tracking-wider">
-    <span class="text-red-500 font-bold tracking-widest" id="navSubtitle">— ACESSO RESTRITO</span>
+    <span class="text-red-500 font-bold tracking-widest" id="navSubtitle">— PAINEL DA LIDERANÇA</span>
     <span class="text-zinc-500">Mecânica RedLine - Fluxo</span>
   </div>
 
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl mx-auto w-full px-4 py-4 flex-1 flex items-center justify-center">
 
-    <!-- 1. TELA PADRÃO: PAINEL DA LIDERANÇA (ABRE ANTES DE TUDO) -->
+    <!-- 1. TELA: PAINEL DA LIDERANÇA (ABRE SE NÃO TIVER TOKEN NA URL) -->
     <div id="screen-leader" class="w-full max-w-md bg-[#0f1016] border border-red-900/80 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden" style="display: block;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <h3 class="text-xl font-extrabold font-heading text-white tracking-wider mt-1">PAINEL DA LIDERANÇA</h3>
       <p class="text-xs text-zinc-400 mt-1">Autentique-se com sua senha para gerar links únicos aos candidatos.</p>
 
-      <!-- Autenticação da Liderança (Campos com type password sem senhas visíveis) -->
       <div id="box-leader-auth" class="space-y-3 mt-5">
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-400 font-heading block">SENHA DA LIDERANÇA</label>
@@ -92,7 +91,6 @@
         </button>
       </div>
 
-      <!-- Gerador Desbloqueado -->
       <div id="box-leader-generator" class="space-y-4 mt-5" style="display: none;">
         <div class="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-800/50 text-[11px] text-emerald-400">
           ✓ <strong>Liderança Autenticada com Sucesso</strong>
@@ -119,13 +117,39 @@
       </div>
     </div>
 
-    <!-- 2. TELA: FOLHA DE ROSTO (SÓ ABRE COM LINK GERADO PELO LÍDER) -->
+    <!-- 2. TELA: CHAVE JÁ UTILIZADA OU BLOQUEADA POR F5 -->
+    <div id="screen-consumed" class="w-full max-w-xl bg-[#0f1016] border border-red-900/60 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
+      <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
+
+      <div class="w-16 h-16 rounded-full bg-red-600/10 border border-red-500/30 flex items-center justify-center mx-auto mt-2 text-2xl text-red-500">
+        🔒
+      </div>
+
+      <h2 class="text-2xl font-extrabold font-heading text-white tracking-wider mt-4">
+        ACESSO BLOQUEADO
+      </h2>
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-heading border mt-1 mb-4 bg-red-950/60 text-red-400 border-red-800/50">
+        LINK CONSUMIDO OU RECARREGADO
+      </div>
+
+      <p class="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">
+        Este link de prova era de acesso único e foi consumido ou invalidado por atualização de página (F5). Não é permitido refazer a avaliação pelo mesmo link.
+      </p>
+
+      <div class="mt-6 pt-5 border-t border-zinc-800/80">
+        <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
+          FALE COM A LIDERANÇA NO DISCORD PARA MAIS INFORMAÇÕES.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. TELA: FOLHA DE ROSTO (ABRE COM LINK VÁLIDO E NÃO CONSUMIDO) -->
     <div id="screen-instructions" class="w-full max-w-2xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden" style="display: none;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
       <div class="flex items-center justify-between pt-2">
         <span class="text-[10px] text-zinc-500 font-heading font-bold uppercase tracking-widest">FOLHA DE ROSTO • PROVA OFICIAL</span>
-        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50">CHAVE VÁLIDA</span>
+        <span class="px-2.5 py-0.5 rounded text-[10px] font-heading font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/50">LINK VÁLIDO</span>
       </div>
 
       <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-wide mt-2">
@@ -140,7 +164,7 @@
         </div>
         <div>
           <label class="text-[10px] uppercase font-bold text-zinc-500 font-heading block">PASSAPORTE / ID (VINCULADO)</label>
-          <input type="text" id="candidateIdInput" readonly class="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
+          <input type="text" id="candidateIdInput" readonly class="w-full bg-zinc-900/80 border border-zinc-800/80 rounded-lg px-3 py-2 text-xs text-zinc-400 cursor-not-allowed mt-1 font-mono">
         </div>
       </div>
 
@@ -177,7 +201,7 @@
         </div>
         <div class="flex items-start gap-2.5">
           <span class="w-4 h-4 rounded bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-[10px] flex-shrink-0">3</span>
-          <p class="text-red-400 font-semibold">⚠️ Não recarregue a página durante a prova, pois o link é de uso único.</p>
+          <p class="text-red-400 font-semibold">⚠️ Este link é de uso único. NÃO recarregue a página (F5) durante o teste, pois seu acesso será cancelado de imediato.</p>
         </div>
       </div>
 
@@ -185,7 +209,7 @@
       <div class="pt-2 border-t border-zinc-800 space-y-4">
         <label class="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-300 select-none">
           <input type="checkbox" id="checkAgree" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-red-600 focus:ring-0 cursor-pointer">
-          <span>Li as instruções e estou pronto para começar. <span class="text-red-500">*</span></span>
+          <span>Li as instruções e estou ciente de que recarregar a página anulará minha prova. <span class="text-red-500">*</span></span>
         </label>
         
         <button type="button" onclick="startExam()" id="btnStartExam" class="w-full py-3 rounded-xl font-heading font-extrabold text-sm tracking-wider uppercase bg-red-600 hover:bg-red-500 active:scale-[0.99] text-white shadow-[0_0_15px_rgba(239,35,60,0.4)] transition-all cursor-pointer">
@@ -194,7 +218,7 @@
       </div>
     </div>
 
-    <!-- 3. TELA: EXECUÇÃO DA QUESTÃO -->
+    <!-- 4. TELA: EXECUÇÃO DA QUESTÃO -->
     <div id="screen-exam" class="w-full grid grid-cols-1 lg:grid-cols-12 gap-6" style="display: none;">
       <div class="lg:col-span-8 bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
         <div class="hazard-stripe h-2 w-full absolute top-0 left-0"></div>
@@ -264,7 +288,7 @@
       </div>
     </div>
 
-    <!-- 4. TELA: BOLETIM DE RESULTADO -->
+    <!-- 5. TELA: BOLETIM DE RESULTADO -->
     <div id="screen-result" class="w-full max-w-xl bg-[#0f1016] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center" style="display: none;">
       <div class="hazard-stripe h-2.5 w-full absolute top-0 left-0"></div>
 
@@ -313,7 +337,7 @@
 
       <div class="mt-6 pt-5 border-t border-zinc-800/80">
         <p class="text-[11px] text-zinc-500 font-heading tracking-wider uppercase">
-          🔒 AVALIAÇÃO CONCLUÍDA COM SUCESSO
+          🔒 PROVA FINALIZADA • CHAVE CONSUMIDA DEFINITIVAMENTE
         </p>
       </div>
     </div>
@@ -486,7 +510,7 @@
     const TIME_PER_QUESTION = 90;
 
     function switchView(targetScreenId) {
-      const screens = ['screen-leader', 'screen-instructions', 'screen-exam', 'screen-result'];
+      const screens = ['screen-leader', 'screen-instructions', 'screen-consumed', 'screen-exam', 'screen-result'];
       screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -495,7 +519,9 @@
       });
       const navSubtitle = document.getElementById('navSubtitle');
       if (navSubtitle) {
-        navSubtitle.textContent = (targetScreenId === 'screen-leader') ? '— PAINEL DA LIDERANÇA' : '— PROVA • ESTAGIÁRIO';
+        if (targetScreenId === 'screen-leader') navSubtitle.textContent = '— PAINEL DA LIDERANÇA';
+        else if (targetScreenId === 'screen-consumed') navSubtitle.textContent = '— ACESSO BLOQUEADO';
+        else navSubtitle.textContent = '— PROVA • ESTAGIÁRIO';
       }
     }
 
@@ -532,18 +558,26 @@
       return Math.abs(hash).toString(16).toUpperCase();
     }
 
-    // INICIALIZAÇÃO
+    // INICIALIZAÇÃO E CONTROLE DE F5 / TRAVA DE TOKEN
     window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const paramId = params.get("id");
       const paramChave = params.get("chave") || params.get("token");
       const paramNome = params.get("nome");
 
-      // SE TEM PARÂMETROS VÁLIDOS DE CANDIDATO: ABRE A PROVA
+      // Se há parâmetros na URL
       if (paramId && paramChave) {
         const expected = createToken(paramId);
-        if (paramChave.toUpperCase() === expected) {
-          currentToken = paramChave;
+        const cleanToken = paramChave.toUpperCase().trim();
+
+        if (cleanToken === expected) {
+          // VERIFICA SE O TOKEN JÁ FOI CONSUMIDO / RECARREGADO COM F5
+          if (localStorage.getItem(`redline_consumed_${cleanToken}`)) {
+            switchView('screen-consumed');
+            return;
+          }
+
+          currentToken = cleanToken;
           document.getElementById("candidateIdInput").value = paramId;
           document.getElementById("candidateIdInput").readOnly = true;
           if (paramNome) {
@@ -554,7 +588,7 @@
         }
       }
 
-      // SE NÃO TEM LINK VÁLIDO: ABRE DIRETO NO PAINEL DO LÍDER
+      // Se não tem parâmetros válidos, cai sempre no painel do líder
       switchView('screen-leader');
     });
 
@@ -616,6 +650,11 @@
       if (!agree) {
         alert("Marque a caixa confirmando que concorda com as instruções.");
         return;
+      }
+
+      // TRAVA DE F5 ATIVADA: consome o token no início da prova
+      if (currentToken) {
+        localStorage.setItem(`redline_consumed_${currentToken}`, "true");
       }
 
       candidateName = name;
@@ -745,85 +784,3 @@
               { name: "🆔 Passaporte / ID", value: `\`${candidateId}\``, inline: true },
               { name: "📊 Aproveitamento", value: `**${score}/10** (${percent}%)`, inline: true },
               { name: "🎯 Nota Mínima", value: "7 / 10 pontos", inline: true },
-              { name: "🔑 Chave Utilizada", value: `\`${currentToken || "ACESSO_DIRETO"}\``, inline: true },
-              { name: "📅 Concluído em", value: new Date().toLocaleString("pt-BR"), inline: true }
-            ],
-            footer: { text: "RedLine Mecânica • Auditoria Interna" },
-            timestamp: new Date().toISOString()
-          }
-        ]
-      };
-
-      fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (res.ok) {
-          msg.textContent = "✓ Relatório registrado com sucesso no Discord da liderança!";
-          msg.className = "mt-4 p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-800 text-[11px] text-emerald-400";
-        } else {
-          msg.textContent = "⚠️ Falha ao enviar para o Discord (verifique o Webhook).";
-        }
-      })
-      .catch(() => {
-        msg.textContent = "⚠️ Erro de rede ao comunicar com o Discord.";
-      });
-    }
-
-    function renderAnswerCard() {
-      const grid = document.getElementById("gridAnswerCard");
-      let count = 0;
-
-      grid.innerHTML = questions.map((q, idx) => {
-        const isCurrent = idx === currentQuestionIdx;
-        const ans = userAnswers[q.id];
-        if (ans) count++;
-
-        let border = "border-zinc-800 bg-zinc-900/60 text-zinc-500";
-        if (isCurrent) {
-          border = "border-red-500 bg-red-500/10 text-red-400 shadow-[0_0_8px_rgba(239,35,60,0.3)]";
-        } else if (ans) {
-          border = "border-zinc-700 bg-zinc-800/80 text-zinc-200";
-        }
-
-        return `
-          <div class="border rounded-lg p-1.5 text-center transition-all ${border}">
-            <span class="text-[9px] font-heading font-bold block">${String(idx + 1).padStart(2, '0')}</span>
-            <span class="text-xs font-heading font-extrabold block min-h-[16px]">${ans ? ans.key : (isCurrent ? '•' : '')}</span>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById("displayAnsweredCount").textContent = `${count}/10`;
-    }
-
-    function startTimer() {
-      clearInterval(timerInterval);
-      timeLeft = TIME_PER_QUESTION;
-      updateTimerDisplay();
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          nextOrFinish();
-        }
-      }, 1000);
-    }
-
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("displayTimer").textContent = 
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-      const offset = 125.6 - (125.6 * timeLeft) / TIME_PER_QUESTION;
-      const circle = document.getElementById("timerCircle");
-      if (circle) circle.style.strokeDashoffset = offset;
-    }
-  </script>
-</body>
-</html>
